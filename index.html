@@ -3,164 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma Suprema de Estudos: 1 Coríntios (ACF)</title>
+    <title>Campeonato Bíblico Pro</title>
     <style>
         :root {
-            --primary: #0F172A;
-            --brand: #1E3A8A;
-            --brand-light: #3B82F6;
-            --accent: #B45309;
-            --accent-light: #F59E0B;
-            --bg-color: #FAF9F6;
-            --card-bg: #FFFFFF;
-            --text-main: #334155;
-            --text-title: #1E293B;
-            --border: #E2E8F0;
-            --success: #15803D;
-            --danger: #B91C1C;
-            --flashcard-bg: #F8FAFC;
+            --primary: #0F172A; --brand: #1E3A8A; --brand-light: #3B82F6;
+            --accent: #B45309; --accent-light: #F59E0B; --bg-color: #FAF9F6;
+            --card-bg: #FFFFFF; --text-main: #334155; --text-title: #1E293B;
+            --border: #E2E8F0; --success: #15803D; --danger: #B91C1C;
+            --flashcard-bg: #F8FAFC; --pts-color: #8B5CF6;
         }
 
         body.dark-theme {
-            --primary: #F1F5F9;
-            --brand: #3B82F6;
-            --brand-light: #60A5FA;
-            --accent: #F59E0B;
-            --accent-light: #FBBF24;
-            --bg-color: #0F172A;
-            --card-bg: #1E293B;
-            --text-main: #CBD5E1;
-            --text-title: #F1F5F9;
-            --border: #334155;
-            --success: #22C55E;
-            --danger: #EF4444;
-            --flashcard-bg: #334155;
+            --primary: #F1F5F9; --brand: #3B82F6; --brand-light: #60A5FA;
+            --accent: #F59E0B; --accent-light: #FBBF24; --bg-color: #0F172A;
+            --card-bg: #1E293B; --text-main: #CBD5E1; --text-title: #F1F5F9;
+            --border: #334155; --success: #22C55E; --danger: #EF4444;
+            --flashcard-bg: #334155; --pts-color: #A78BFA;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; transition: background-color 0.3s, border-color 0.3s; }
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
         
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        header { background-color: #0F172A; color: white; padding: 1.2rem 0; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        header { background-color: #0F172A; color: white; padding: 1.2rem 0; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--accent); }
         nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px; color: white; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: white; }
         .logo span { color: var(--accent-light); }
-        
-        .header-controls { display: flex; align-items: center; gap: 1rem; }
         .theme-toggle { background: var(--accent); border: none; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
-        .theme-toggle:hover { opacity: 0.9; }
-
+        
         .nav-links button { background: none; border: none; color: #94A3B8; font-size: 0.95rem; font-weight: 600; margin-left: 0.5rem; cursor: pointer; padding: 0.6rem 1.1rem; border-radius: 6px; }
-        .nav-links button:hover { color: white; }
         .nav-links button.active { background-color: var(--brand); color: white; }
 
         main { max-width: 1000px; margin: 2.5rem auto; padding: 0 2rem; min-height: 75vh; }
-        section { display: none; background: var(--card-bg); padding: 3rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); animation: fadeIn 0.4s ease forwards; }
-        section.active { display: block; }
+        section { display: none; background: var(--card-bg); padding: 3rem; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        section.active { display: block; animation: fadeIn 0.4s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         h1 { color: var(--text-title); font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800; }
-        h2 { color: var(--brand); font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem; }
         p { margin-bottom: 1.2rem; font-size: 1.05rem; }
 
-        /* Dashboard */
-        .welcome-box { background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%); color: white; padding: 2.5rem; border-radius: 12px; margin-bottom: 2.5rem; border-left: 5px solid var(--accent); }
-        .welcome-box h1 { color: white; }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
-        .stat-card { background: var(--flashcard-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; text-align: center; }
-        .stat-num { display: block; font-size: 2.2rem; font-weight: 800; color: var(--brand); }
-        .stat-label { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: #64748B; }
-
-        /* Modo Estudo Avançado (Acordeão) */
-        .accordion-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1rem; overflow: hidden; }
-        .accordion-header { background: var(--flashcard-bg); padding: 1.2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; color: var(--text-title); }
-        .accordion-header:hover { background: var(--border); }
-        .accordion-content { display: none; padding: 1.8rem; background: var(--card-bg); border-top: 1px solid var(--border); }
-        .accordion-content.open { display: block; }
-        
-        .study-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; background: #0f172a10; padding: 0.5rem 1rem; border-radius: 6px; }
-        body.dark-theme .study-meta { background: #ffffff10; }
-
-        .gold-verses { background: #FFFBEB; border-left: 4px solid #D97706; padding: 1rem; border-radius: 6px; margin: 1rem 0; color: #78350F; font-style: italic; }
-        body.dark-theme .gold-verses { background: #78350f30; color: #FDE68A; border-left-color: var(--accent); }
-        .gold-verses strong { display: block; font-style: normal; margin-top: 0.5rem; font-size: 0.9rem; }
-
-        /* Flashcards */
-        .flashcards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-        .flashcard { background: var(--flashcard-bg); border: 2px dashed var(--border); padding: 1.2rem; border-radius: 8px; cursor: pointer; min-height: 120px; display: flex; flex-direction: column; justify-content: center; text-align: center; position: relative; }
-        .flashcard .card-back { display: none; color: var(--brand); font-weight: bold; }
-        .flashcard.flipped .card-front { display: none; }
-        .flashcard.flipped .card-back { display: block; }
-        .flashcard-hint-badge { position: absolute; bottom: 4px; right: 8px; font-size: 0.7rem; color: #94A3B8; }
-
-        /* Custom Checkbox */
-        .check-container { display: flex; align-items: center; gap: 0.5rem; font-weight: bold; font-size: 0.95rem; cursor: pointer; }
-        .check-container input { width: 18px; height: 18px; accent-color: var(--success); }
-
-        /* Botões */
-        .btn { background-color: var(--brand); color: white; border: none; padding: 0.9rem 1.8rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .btn:hover { filter: brightness(1.2); transform: translateY(-1px); }
+        .btn { background-color: var(--brand); color: white; border: none; padding: 0.9rem 1.8rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; }
+        .btn:hover { filter: brightness(1.2); }
         .btn-accent { background-color: var(--accent); }
-        .btn-secondary { background-color: #64748B; }
 
-        /* Quiz UI */
-        .progress-bar-container { width: 100%; height: 8px; background-color: var(--border); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; }
-        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--brand) 0%, var(--brand-light) 100%); width: 0%; transition: width 0.3s; }
+        select { padding: 0.9rem; border-radius: 8px; border: 2px solid var(--border); font-size: 1rem; width: 100%; margin-bottom: 1.5rem; background-color: var(--flashcard-bg); color: var(--text-title); font-weight: bold; }
+        .quiz-meta-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; background: var(--flashcard-bg); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); }
+        .badge-pts { background: var(--pts-color); color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem; }
+        .badge-diff { background: var(--border); color: var(--text-title); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
+
+        .question-text { font-size: 1.3rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-title); line-height: 1.5; }
         
-        .quiz-meta-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .timer-box { font-weight: 800; font-size: 1.1rem; color: var(--danger); background: #fef2f2; padding: 0.3rem 0.8rem; border-radius: 6px; border: 1px solid var(--danger); display: none; }
-        body.dark-theme .timer-box { background: #7f1d1d30; }
-
-        .question-text { font-size: 1.3rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-title); }
         .options-container { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-        
         .option-label { display: flex; align-items: center; padding: 1.2rem; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-size: 1.05rem; font-weight: 500; background: var(--card-bg); }
         .option-label:hover { border-color: var(--brand-light); }
-        .option-label input { margin-right: 1.2rem; transform: scale(1.3); accent-color: var(--brand); }
-        
-        .option-label.correct { background-color: #compressed; border-color: var(--success) !important; background: #f0fdf4 !important; color: #14532d; font-weight: 700; }
-        body.dark-theme .option-label.correct { background: #14532d40 !important; color: #22C55E; }
+        .option-label input { margin-right: 1.2rem; transform: scale(1.3); }
+        .option-label.correct { border-color: var(--success) !important; background: #f0fdf4 !important; color: #14532d; font-weight: 700; }
         .option-label.incorrect { border-color: var(--danger) !important; background: #fef2f2 !important; color: #7f1d1d; }
-        body.dark-theme .option-label.incorrect { background: #7f1d1d40 !important; color: #EF4444; }
 
-        .hint-text-box { background: var(--flashcard-bg); border-left: 4px solid var(--brand); padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; display: none; animation: fadeIn 0.3s; }
-
-        /* Configurações Extras */
-        .config-group { background: var(--flashcard-bg); padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 1.5rem; }
-        .toggle-container { display: flex; align-items: center; gap: 1rem; cursor: pointer; font-weight: 600; }
-        .toggle-container input { width: 20px; height: 20px; }
-        select { padding: 0.9rem; border-radius: 8px; border: 2px solid var(--border); font-size: 1rem; width: 100%; margin-bottom: 1.5rem; background-color: var(--flashcard-bg); color: var(--text-title); }
-
-        /* Tabelas e Erros */
+        .input-fill { border: 0; border-bottom: 3px solid var(--brand); background: transparent; font-size: 1.3rem; font-weight: 700; color: var(--brand); padding: 0 10px; text-align: center; outline: none; width: 180px; }
+        .input-fill:focus { border-bottom-color: var(--accent); }
+        .input-desc { width: 100%; height: 120px; padding: 1rem; border-radius: 8px; border: 2px solid var(--border); background: var(--flashcard-bg); color: var(--text-title); font-size: 1rem; resize: vertical; outline: none; }
+        
         table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
         th, td { text-align: left; padding: 1.2rem; border-bottom: 1px solid var(--border); }
         th { background-color: var(--flashcard-bg); color: var(--text-title); font-weight: 700; }
-        
-        .review-err-container { margin-top: 2rem; border: 1px solid var(--danger); padding: 1.5rem; border-radius: 10px; background: #fef2f205; display: none; }
-        .err-item { border-bottom: 1px solid var(--border); padding: 1rem 0; }
-        .err-item:last-child { border: none; }
-
-        .keyboard-hint { margin-top: 1.5rem; padding: 0.8rem; background: var(--flashcard-bg); border-radius: 8px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500; }
-
-        @media (max-width: 768px) {
-            nav { flex-direction: column; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; }
-            section { padding: 1.5rem; }
-            .btn { width: 100%; margin-bottom: 0.5rem; }
-        }
     </style>
 </head>
 <body>
 
     <header>
         <nav>
-            <div class="logo">1 Coríntios | <span>ACF Pro Platform</span></div>
-            <div class="header-controls">
-                <button class="theme-toggle" onclick="toggleTheme()">Alternar Tema 🌓</button>
-                <div class="nav-links">
+            <div class="logo">ACF Pro <span>Engine</span></div>
+            <div>
+                <button class="theme-toggle" onclick="toggleTheme()">Tema 🌓</button>
+                <div class="nav-links" style="display:inline-block;">
                     <button id="nav-home" class="active" onclick="navigateTo('home')">Início</button>
-                    <button id="nav-study" onclick="navigateTo('study')">Modo Estudo</button>
-                    <button id="nav-quiz" onclick="navigateTo('quiz-setup')">Modo Quiz</button>
+                    <button id="nav-quiz" onclick="navigateTo('quiz-setup')">Novo Simulado</button>
                     <button id="nav-history" onclick="navigateTo('history')">Histórico</button>
                 </div>
             </div>
@@ -169,481 +87,221 @@
 
     <main>
         <section id="home" class="active">
-            <div class="welcome-box">
-                <h1>Plataforma de Alta Performance</h1>
-                <p>Treinamento ativo, memorização profunda e simulação estruturada sob o texto literal da ACF.</p>
-            </div>
-
-            <h2>Estatísticas Gerais</h2>
-            <div class="dashboard-grid">
-                <div class="stat-card"><span class="stat-num" id="stat-tests">0</span><span class="stat-label">Simulados Feitos</span></div>
-                <div class="stat-card"><span class="stat-num" id="stat-avg">0%</span><span class="stat-label">Média Geral</span></div>
-                <div class="stat-card"><span class="stat-num" id="stat-chapters">0/16</span><span class="stat-label">Capítulos Lidos</span></div>
-            </div>
-
-            <h2>Metodologia de Estudo Aplicada</h2>
-            <p>Combine a leitura guiada no <strong>Modo Estudo</strong> (marcando capítulos como lidos e desafiando seu cérebro com os flashcards ocultos) com o <strong>Modo Quiz</strong> configurado com cronômetro para emular a pressão real de maratonas intelectuais.</p>
-            
-            <div style="margin-top: 2rem;">
-                <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Iniciar Simulado de Corrida</button>
-            </div>
-        </section>
-
-        <section id="study">
-            <h1>Ambiente de Revisão Dinâmica</h1>
-            <p>Clique nas abas dos capítulos para expandir os resumos estruturados, revisar os <strong>Versículos de Ouro</strong> e praticar com os <strong>Flashcards rápidos</strong> (clique neles para virar).</p>
-            <div id="study-accordion-container"></div>
+            <h1>Plataforma de Alta Performance</h1>
+            <p>Bem-vindo ao motor de testes bíblicos. Escolha o módulo, o nível de dificuldade e inicie o campeonato.</p>
+            <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Configurar Desafio</button>
         </section>
 
         <section id="quiz-setup">
-            <h1>Parâmetros do Simulado</h1>
-            <p>Monte o escopo e o nível de dificuldade do seu teste estratégico.</p>
-            
-            <label style="font-weight:700; display:block; margin-bottom:0.5rem;">Defina o Escopo:</label>
-            <select id="quiz-type"></select>
-
-            <div class="config-group">
-                <label class="toggle-container">
-                    <input type="checkbox" id="config-pressure">
-                    💥 Ativar Modo Sob Pressão (20 segundos por questão)
-                </label>
-            </div>
-
-            <button class="btn btn-accent" onclick="startQuiz()">Lançar Desafio [Enter]</button>
+            <h1>Definição de Prova</h1>
+            <label style="display:block; margin-bottom:0.5rem; font-weight:bold;">Escolha o Módulo:</label>
+            <select id="quiz-mode">
+                <optgroup label="Simulados Individuais (Normal e Difícil)">
+                    <option value="cap1-normal">Capítulo 1 - Normal</option><option value="cap1-hard">Capítulo 1 - Difícil</option>
+                    <option value="cap2-normal">Capítulo 2 - Normal</option><option value="cap2-hard">Capítulo 2 - Difícil</option>
+                    <option value="cap3-normal">Capítulo 3 - Normal</option><option value="cap3-hard">Capítulo 3 - Difícil</option>
+                    <option value="cap4-normal">Capítulo 4 - Normal</option><option value="cap4-hard">Capítulo 4 - Difícil</option>
+                    <option value="cap5-normal">Capítulo 5 - Normal</option><option value="cap5-hard">Capítulo 5 - Difícil</option>
+                    <option value="cap6-normal">Capítulo 6 - Normal</option><option value="cap6-hard">Capítulo 6 - Difícil</option>
+                    <option value="cap7-normal">Capítulo 7 - Normal</option><option value="cap7-hard">Capítulo 7 - Difícil</option>
+                    <option value="cap8-normal">Capítulo 8 - Normal</option><option value="cap8-hard">Capítulo 8 - Difícil</option>
+                    <option value="cap9-normal">Capítulo 9 - Normal</option><option value="cap9-hard">Capítulo 9 - Difícil</option>
+                    <option value="cap10-normal">Capítulo 10 - Normal</option><option value="cap10-hard">Capítulo 10 - Difícil</option>
+                    <option value="cap11-normal">Capítulo 11 - Normal</option><option value="cap11-hard">Capítulo 11 - Difícil</option>
+                    <option value="cap12-normal">Capítulo 12 - Normal</option><option value="cap12-hard">Capítulo 12 - Difícil</option>
+                    <option value="cap13-normal">Capítulo 13 - Normal</option><option value="cap13-hard">Capítulo 13 - Difícil</option>
+                    <option value="cap14-normal">Capítulo 14 - Normal</option><option value="cap14-hard">Capítulo 14 - Difícil</option>
+                    <option value="cap15-normal">Capítulo 15 - Normal</option><option value="cap15-hard">Capítulo 15 - Difícil</option>
+                    <option value="cap16-normal">Capítulo 16 - Normal</option><option value="cap16-hard">Capítulo 16 - Difícil</option>
+                </optgroup>
+                <optgroup label="Simulados Globais (Mistura de Conteúdos)">
+                    <option value="geral-unico">Simulado Geral Exclusivo</option>
+                    <option value="geral-random">Mega Mix Aleatório Total</option>
+                </optgroup>
+            </select>
+            <button class="btn btn-accent" onclick="startEngine()">Iniciar Prova</button>
         </section>
 
         <section id="quiz-active">
-            <div class="progress-bar-container"><div class="progress-bar" id="quiz-progress-bar"></div></div>
-            
             <div class="quiz-meta-line">
-                <h3 id="quiz-progress-text" style="color:var(--brand); font-weight:700;">Questão X de Y</h3>
-                <div class="timer-box" id="quiz-timer">20s</div>
+                <div><span style="font-weight:700; color:var(--brand);" id="q-counter"></span></div>
+                <div style="display:flex; gap:10px;">
+                    <span class="badge-diff" id="q-diff"></span>
+                    <span class="badge-pts" id="q-pts"></span>
+                </div>
             </div>
-
-            <div class="question-text" id="question-text">Buscando pergunta...</div>
-            <div class="hint-text-box" id="hint-box"></div>
-            <div class="options-container" id="options-container"></div>
-
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-                <button class="btn" id="btn-submit" onclick="submitAnswer()">Confirmar [Enter]</button>
-                <button class="btn btn-secondary" id="btn-hint" onclick="revealHint()">Pedir Pista 💡</button>
-                <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none; background-color:var(--success);">Avançar [Enter]</button>
-            </div>
+            <div class="question-text" id="question-text"></div>
             
-            <br>
-            <div class="keyboard-hint">⌨️ Setas <strong>↑ ↓</strong> selecionam; <strong>Enter</strong> confirma ou avança.</div>
+            <div class="options-container" id="ui-mcq" style="display:none;"></div>
+            <div id="ui-desc" style="display:none; margin-bottom:2rem;">
+                <textarea class="input-desc" id="answer-desc" placeholder="Digite sua resposta descritiva aqui..."></textarea>
+            </div>
+            <div id="feedback-box" style="margin-bottom:1.5rem; font-weight:bold; font-size:1.1rem; display:none; padding:1rem; border-radius:8px;"></div>
+
+            <div>
+                <button class="btn" id="btn-submit" onclick="processAnswer()">Confirmar Resposta</button>
+                <button class="btn btn-accent" id="btn-next" onclick="goNext()" style="display:none;">Próxima Questão</button>
+            </div>
         </section>
 
         <section id="quiz-result">
-            <h1>Balanço Geral da Rodada</h1>
-            <h2 id="score-display" style="font-size:2.2rem; font-weight:800; margin-bottom:0.5rem;">0 de 0</h2>
-            <p id="percentage-display" style="font-size:1.2rem; font-weight:bold; margin-bottom:2rem;"></p>
-            
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-                <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Iniciar Nova Rodada</button>
-                <button class="btn btn-secondary" onclick="navigateTo('history')">Ver Histórico Completo</button>
-            </div>
-
-            <div class="review-err-container" id="review-errors-wrapper">
-                <h3 style="color:var(--danger); margin-bottom:1rem;">🎯 Raio-X de Incorreções (Erros da Rodada)</h3>
-                <div id="review-errors-list"></div>
-            </div>
+            <h1>Resultado do Simulado</h1>
+            <h2 id="final-score" style="font-size:2.5rem; margin-bottom:0;">0 Pts</h2>
+            <p id="final-stats" style="font-size:1.2rem; font-weight:bold; margin-bottom:2rem;"></p>
+            <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Novo Teste</button>
         </section>
 
         <section id="history">
-            <h1>Linha do Tempo de Desempenho</h1>
-            <p>Seus exames locais são persistidos na memória do navegador.</p>
-            <div style="overflow-x:auto;">
-                <table>
-                    <thead><tr><th>Data/Hora</th><th>Foco</th><th>Placar</th><th>Percentual</th></tr></thead>
-                    <tbody id="history-body"></tbody>
-                </table>
-            </div>
-            <button class="btn" onclick="clearHistory()" style="background-color:var(--danger); margin-top:2rem; font-size:0.9rem;">Zerar Banco de Dados</button>
+            <h1>Registro de Desempenho</h1>
+            <table>
+                <thead><tr><th>Modo</th><th>Acertos</th><th>Pontuação</th></tr></thead>
+                <tbody id="history-body"></tbody>
+            </table>
         </section>
     </main>
 
     <script>
-        // BANCO DE DADOS: 16 CAPÍTULOS ULTRA-ESTRUTURADOS COM VERSÍCULOS DE OURO E FLASHCARDS (ACF LITERAL)
-        const studyData = [
-            { cap: 1, title: "Capítulo 1: Dissensões Partidárias e a Palavra da Cruz", summary: "Paulo repreende asperamente as divisões em Corinto causadas pelo partidarismo ('Eu sou de Paulo, eu de Apolo...'). Apresenta a palavra da cruz como loucura para os que perecem, mas poder de Deus para os salvos.", verse: "Porque a palavra da cruz é loucura para os que perecem; mas para nós, que somos salvos, é o poder de Deus.", ref: "1 Coríntios 1:18", cards: [{f:"Quem Paulo batizou em Corinto além de Crispo e Gaio?", b:"A família de Estéfanas (1:16)"}, {f:"O que a palavra da cruz é para os judeus e gregos?", b:"Escândalo para os judeus e loucura para os gregos (1:23)"}] },
-            { cap: 2, title: "Capítulo 2: A Sabedoria Oculta de Deus em Mistério", summary: "O apóstolo demonstra que sua pregação não consistiu em palavras persuasivas de sabedoria humana. Expõe a sabedoria oculta que o homem natural não pode discernir.", verse: "Ora, o homem natural não compreende as coisas do Espírito de Deus, porque lhe são loucura; e não pode entendê-las, porquanto se discernem espiritualmente.", ref: "1 Coríntios 2:14", cards: [{f:"Como as coisas profundas de Deus são reveladas?", b:"Pelo Seu Espírito (2:10)"}, {f:"Quem conheceu a mente do Senhor para que possa instruí-lo?", b:"Ninguém, mas nós temos a mente de Cristo (2:16)"}] },
-            { cap: 3, title: "Capítulo 3: O Único Fundamento e as Obras Provadas", summary: "Repreensão à carnalidade dos irmãos. Paulo define que o único alicerce legítimo é Cristo e adverte que o fogo provará a qualidade da obra de cada construtor.", verse: "Porque ninguém pode pôr outro fundamento além do que já está posto, o qual é Jesus Cristo.", ref: "1 Coríntios 3:11", cards: [{f:"Quais materiais queimam na prova do fogo?", b:"Madeira, feno e palha (3:12)"}, {f:"O que a igreja coletiva é descrita como?", b:"Templo de Deus e morada do Espírito (3:16)"}] },
-            { cap: 4, title: "Capítulo 4: Os Apóstolos como Despenseiros e Espetáculo", summary: "Trata da fidelidade requerida dos despenseiros dos mistérios de Deus. Descreve as aflições e a humilhação pública sofrida pelos apóstolos de Cristo.", verse: "Assim, pois, cada um nos considere como ministros de Cristo, e despenseiros dos mistérios de Deus. Além disso requer-se dos despenseiros que cada um se ache fiel.", ref: "1 Coríntios 4:1-2", cards: [{f:"A quem os apóstolos foram feitos espetáculo?", b:"Ao mundo, aos anjos e aos homens (4:9)"}, {f:"Em que consiste o reino de Deus na definição de Paulo?", b:"Não em palavras, mas em poder (4:20)"}] },
-            { cap: 5, title: "Capítulo 5: Julgamento da Fornicação Intolerável", summary: "Caso horrendo de fornicação (homem com a mulher de seu pai). Paulo ordena a expulsão imediata do transgressor da comunidade para purificação do fermento velho.", verse: "Geralmente se ouve que há entre vós fornicação, e fornicação tal, que nem ainda entre os gentios se nomeia, como é haver quem possua a mulher de seu pai.", ref: "1 Coríntios 5:1", cards: [{f:"O que um pouco de fermento faz?", b:"Leveda toda a massa (5:6)"}, {f:"Quem é a nossa Páscoa que foi sacrificada?", b:"Cristo (5:7)"}] },
-            { cap: 6, title: "Capítulo 6: Litígios Perante Infiéis e o Corpo como Templo", summary: "Condena crentes que processam irmãos em tribunais pagãos. Traz fortes avisos contra a prostituição, lembrando que o corpo foi comprado por bom preço.", verse: "Ou não sabeis que o vosso corpo é o templo do Espírito Santo, que habita em vós, proveniente de Deus, e que não sois de vós mesmos? Porque fostes comprados por bom preço...", ref: "1 Coríntios 6:19-20", cards: [{f:"Quem herdará o reino de Deus segundo a lista de avisos?", b:"Não herdarão: devassos, idólatras, adúlteros, efeminados, sodomitas, ladrões, avarentos, bêbados, maldizentes ou roubadores (6:9-10)"}, {f:"Complete: 'Todas as coisas me são lícitas, mas...'", b:"'...nem todas as coisas convêm' (6:12)"}] },
-            { cap: 7, title: "Capítulo 7: Preceitos Sobre Casamento, Celibato e Continência", summary: "Respostas a dúvidas sobre a vida conjugal, dever mútuo, separação e as vantagens espirituais do celibato para dedicação integral às coisas do Senhor.", verse: "Mas, se não podem conter-se, casem-se. Porque é melhor casar-se do que abrasar-se.", ref: "1 Coríntios 7:9", cards: [{f:"Qual o conselho para a mulher cujo marido faleceu?", b:"Fica livre para casar com quem quiser, contanto que seja no Senhor (7:39)"}, {f:"Por que o solteiro cuida melhor das coisas do Senhor?", b:"Porque busca como agradar ao Senhor sem divisões do mundo (7:32)"}] },
-            { cap: 8, title: "Capítulo 8: Coisas Sacrificadas a Ídolos e o Saber", summary: "Aborda os limites do conhecimento (ciência) e a primazia do amor. Exorta os crentes fortes a não usarem sua liberdade para escandalizar a consciência dos fracos.", verse: "No que toca às coisas sacrificadas aos ídolos, sabemos que todos temos ciência. A ciência ensoberbece, mas o amor edifica.", ref: "1 Coríntios 8:1", cards: [{f:"Se a comida escandalizar o irmão, qual a postura de Paulo?", b:"Nunca mais comerá carne para não ser tropeço (8:13)"}, {f:"Quantos Deuses existem para nós?", b:"Um só Deus, o Pai, e um só Senhor, Jesus Cristo (8:6)"}] },
-            { cap: 9, title: "Capítulo 9: Defesa dos Direitos Apostólicos e a Disciplina", summary: "Paulo defende seu direito de receber sustento material, porém explica que abre mão desse privilégio pelo progresso do Evangelho. Usa a metáfora dos atletas.", verse: "Não sabeis vós que os que correm no estádio, todos, na verdade, correm, mas um só leva o prêmio? Correi de tal maneira que o alcanceis.", ref: "1 Coríntios 9:24", cards: [{f:"O que os corredores buscam ganhar vs o que nós buscamos?", b:"Eles uma coroa corruptível, nós uma incorruptível (9:25)"}, {f:"O que Paulo faz com o próprio corpo para não ser desqualificado?", b:"Esmurra-o (ou esbofeteia-o) e o reduz à servidão (9:27)"}] },
-            { cap: 10, title: "Capítulo 10: Exemplos do Deserto e Tudo para Glória de Deus", summary: "Adverte contra a autoconfiança excessiva usando as rebeliões e punições do povo de Israel no deserto. Conclui direcionando a finalidade de todas as ações.", verse: "Portanto, quer comais quer bebais, ou façais outra qualquer coisa, fazei tudo para glória de Deus.", ref: "1 Coríntios 10:31", cards: [{f:"O que acontece com quem cuida estar em pé?", b:"Olhe não caia (10:12)"}, {f:"Deus permite tentações maiores do que podemos suportar?", b:"Não, Ele é fiel e dará também o escape (10:13)"}] },
-            { cap: 11, title: "Capítulo 11: Cobertura da Cabeça e Desordens na Ceia", summary: "Instruções sobre a ordem do culto, o uso do véu e as graves repreensões contra os abusos, orgias e divisões sociais cometidas na mesa da Ceia do Senhor.", verse: "Porque eu recebi do Senhor o que também vos ensinei: que o Senhor Jesus, na noite em que foi traído, tomou o pão;", ref: "1 Coríntios 11:23", cards: [{f:"Qual a consequência de comer e beber a Ceia indignamente?", b:"Come e bebe juízo para si, razão pela qual há muitos fracos e doentes (11:29-30)"}, {f:"O que os homens faziam na Ceia que gerou ira em Paulo?", b:"Adiantavam-se para comer, deixando uns com fome e outros embriagados (11:21)"}] },
-            { cap: 12, title: "Capítulo 12: Diversidade de Dons e a Unidade do Corpo", summary: "Expõe a maravilhosa variedade de dons, ministérios e operações espirituais gerados por um só Espírito. Desenvolve a analogia do corpo humano.", verse: "Ora, há diversidade de dons, mas o mesmo Espírito. E há diversidade de ministérios, mas o mesmo Senhor.", ref: "1 Coríntios 12:4-5", cards: [{f:"Pode o olho dizer à mão: 'Não tenho necessidade de ti'?", b:"Não, todos os membros são essenciais e interdependentes (12:21)"}, {f:"O que acontece quando um membro sofre?", b:"Todos os membros sofrem com ele (12:26)"}] },
-            { cap: 13, title: "Capítulo 13: A Excelência Suprema da Caridade", summary: "Tratado magistral sobre a Caridade (amor em ação). Paulo prova que línguas, profecias, ciência e sacrifícios patrimoniais são nulos se desprovidos de caridade.", verse: "A caridade é sofredora, é benigna; a caridade não é invejosa; a caridade não trata com leviandade, não se ensoberbece.", ref: "1 Coríntios 13:4", cards: [{f:"Quais três virtudes permanecem agora?", b:"A fé, a esperança e a caridade; a maior delas é a caridade (13:13)"}, {f:"O que acontece com as profecias e a ciência?", b:"Serão aniquiladas / desaparecerão (13:8)"}] },
-            { cap: 14, title: "Capítulo 14: Regulamento dos Dons de Profecia e Línguas", summary: "Regras litúrgicas rígidas para o uso dos dons de elocução. Paulo prioriza a profecia pela capacidade de edificar a igreja e impõe ordem restrita nas reuniões.", verse: "Mas faça-se tudo decentemente e com ordem.", ref: "1 Coríntios 14:40", cards: [{f:"O que acontece se alguém falar em línguas sem intérprete?", b:"Deve ficar calado na igreja, falando consigo mesmo e com Deus (14:28)"}, {f:"Deus é Deus de que tipo de ambiente?", b:"Não de confusão, mas de paz (14:33)"}] },
-            { cap: 15, title: "Capítulo 15: A Doutrina Absoluta da Ressurreição dos Mortos", summary: "Argumentação teológica fundamental provando a ressurreição física de Jesus e dos crentes. Descreve a transformação do corpo mortal no último clarim.", verse: "E, se Cristo não ressuscitou, é vã a nossa pregação, e também é vã a vossa fé.", ref: "1 Coríntios 15:14", cards: [{f:"O que as más conversações fazem?", b:"Corrompem os bons costumes (15:33)"}, {f:"Qual é o último inimigo que será destruído?", b:"A morte (15:26)"}] },
-            { cap: 16, title: "Capítulo 16: Instruções de Coletas, Planos de Viagem e Saudações", summary: "Orientações administrativas financeiras sobre coletas semanais aos necessitados, atualizações sobre viagens missionárias e ordens finais de vigilância.", verse: "Vigiai, estai firmes na fé; portai-vos varonilmente, e fortalecei-vos. Todas as vossas coisas sejam feitas com caridade.", ref: "1 Coríntios 16:13-14", cards: [{f:"Quando a coleta deveria ser recolhida em Corinto?", b:"No primeiro dia da semana (16:2)"}, {f:"Qual o significado da expressão solene 'Maranata'?", b:"O Senhor vem! (16:22)"}] }
+        const questionBank = [
+// COLE AS PERGUNTAS AQUI
         ];
 
-        // BANCO DE DADOS: QUESTÕES DO SIMULADO (ACF - COM HINTS E PISTAS ESPECÍFICAS)
-        const allQuestions = [
-            { chapter: 1, question: "Em 1 Coríntios 1:12, quais os líderes que os crentes usavam para justificar suas dissensões partidárias?", hint: "Verifique 1 Coríntios 1:12 - O texto cita nominalmente quatro correntes.", options: [{ text: "Paulo, Apolo, Cefas e Cristo", correct: true }, { text: "Paulo, Barnabé, Tiago e João", correct: false }, { text: "Apolo, Silas, Timóteo e Jesus", correct: false }, { text: "Cefas, Lucas, Marcos e Paulo", correct: false }] },
-            { chapter: 2, question: "Segundo 1 Coríntios 2:14, por que o 'homem natural' não compreende as coisas do Espírito de Deus?", hint: "Capítulo 2 versículo 14 - Há uma limitação de discernimento de ordem espiritual.", options: [{ text: "Porque lhe são loucura; e não pode entendê-las, porquanto se discernem espiritualmente.", correct: true }, { text: "Porque dependem do conhecimento das filosofias humanas antigas.", correct: false }, { text: "Porque ele rejeita a autoridade apostólica de Jerusalém.", correct: false }, { text: "Porque a sua mente está cauterizada pela lei mosaica.", correct: false }] },
-            { chapter: 3, question: "No capítulo 3, quais são os materiais listados por Paulo que podem ser usados para edificar sobre o fundamento, mas que serão provados pelo fogo?", hint: "Capítulo 3 versículo 12 - Três materiais nobres e três combustíveis.", options: [{ text: "Ouro, prata, pedras preciosas, madeira, feno, palha", correct: true }, { text: "Tijolo, cimento, ferro, bronze, argila, folhas", correct: false }, { text: "Ouro, bronze, cobre, pedras, cipreste, linho", correct: false }, { text: "Madeira, ferro, chumbo, pedras lavradas, gesso, palha", correct: false }] },
-            { chapter: 4, question: "Em 1 Coríntios 4:9, como Paulo descreve a condição dos apóstolos em relação ao mundo?", hint: "Capítulo 4 versículo 9 - Fala sobre condenação, humilhação e uma plateia cósmica.", options: [{ text: "Como postos por últimos, como condenados à morte; pois somos feitos espetáculo ao mundo, aos anjos e aos homens.", correct: true }, { text: "Como governantes espirituais coroados com honra diante dos gentios.", correct: false }, { text: "Como sacerdotes intocáveis protegidos no templo do Altíssimo.", correct: false }, { text: "Como mestres ricos que reinam em sabedoria e posses em Corinto.", correct: false }] },
-            { chapter: 5, question: "Em 1 Coríntios 5, qual termo e situação específica Paulo condena rigidamente na igreja?", hint: "Capítulo 5 versículo 1 - Imoralidade familiar chocante.", options: [{ text: "Uma fornicação tal, que nem ainda entre os gentios se nomeia, como é haver quem possua a mulher de seu pai.", correct: true }, { text: "O adultério consensual de dois diáconos em praça pública.", correct: false }, { text: "A visita frequente a santuários pagãos para banquetes rituais.", correct: false }, { text: "Casamentos mistos proibidos pela lei sacerdotal tradicional.", correct: false }] },
-            { chapter: 6, question: "Conforme 1 Coríntios 6:19, qual o forte motivo apresentado para fugir da prostituição?", hint: "Capítulo 6 versículo 19 - Propriedade de Deus e morada divina.", options: [{ text: "O vosso corpo é o templo do Espírito Santo, que habita em vós, proveniente de Deus...", correct: true }, { text: "As autoridades romanas aplicam multas severas aos imorais.", correct: false }, { text: "A liderança da igreja excluirá permanentemente quem for pego.", correct: false }, { text: "A lei de Moisés exige o apedrejamento público do culpado.", correct: false }] },
-            { chapter: 7, question: "Em relação ao casamento e à continência no capítulo 7, qual a célebre afirmação da ACF para quem não consegue se conter?", hint: "Capítulo 7 versículo 9 - Um dilema prático sobre autocontrole contra a paixão avassaladora.", options: [{ text: "Porque é melhor casar-se do que abrasar-se.", correct: true }, { text: "Because o casamento purifica os desejos carnais da mente.", correct: false }, { text: "A solteirice traz vergonha perante a comunidade local.", correct: false }, { text: "Todos são obrigados por mandamento a constituir família na fé.", correct: false }] },
-            { chapter: 8, question: "No capítulo 8, tratando das coisas sacrificadas aos ídolos, qual o contraste estabelecido entre a 'ciência' e o 'amor'?", hint: "Capítulo 8 versículo 1 - O perigo do intelecto sem afeição espiritual.", options: [{ text: "A ciência ensoberbece, mas o amor edifica.", correct: true }, { text: "A ciência liberta a mente, mas o amor prende o coração.", correct: false }, { text: "A ciência traz a salvação, mas o amor traz a paz social.", correct: false }, { text: "Tanto a ciência quanto o amor são inúteis sem o batismo.", correct: false }] },
-            { chapter: 9, question: "Em 1 Coríntios 9:25, os atletas lutam para alcançar uma recompensa temporária. Como a ACF descreve essa recompensa em contraste com a recompensa do cristão?", hint: "Capítulo 9 versículo 25 - O termo envolve a deterioração ou perenidade da coroa.", options: [{ text: "Eles para alcançar uma coroa corruptível; nós, porém, uma incorruptível.", correct: true }, { text: "Eles para ganhar aclamação terrena; nós, a eternidade no céu.", correct: false }, { text: "Eles por medalhas de bronze; nós, por tesouros de ouro puro.", correct: false }, { text: "Eles pela glória da pátria; nós, pelo favor divino imutável.", correct: false }] },
-            { chapter: 10, question: "Qual a instrução clássica sobre as ações diárias deixada em 1 Coríntios 10:31?", hint: "Capítulo 10 versículo 31 - Comer, beber ou qualquer outro ato tem um alvo supremo.", options: [{ text: "Portanto, quer comais quer bebais, ou façais outra qualquer coisa, fazei tudo para glória de Deus.", correct: true }, { text: "Portanto, guardai os vossos corações em moderação diante dos homens.", correct: false }, { text: "Portanto, comei com ações de graças o que vos for posto na mesa.", correct: false }, { text: "Portanto, não julgueis a mesa do vosso próximo para não serdes julgados.", correct: false }] },
-            { chapter: 11, question: "Que grave desordem ocorria nas reuniões de Corinto quando se reuniam para comer a Ceia do Senhor (capítulo 11)?", hint: "Capítulo 11 versículo 21 - Uma total falta de comunhão e respeito, com excessos e escassez simultâneos.", options: [{ text: "Cada um toma antecipadamente a sua própria ceia; e assim um tem fome e outro embriaga-se.", correct: true }, { text: "Eles usavam vinho estragado e pães sacrificados a ídolos pagãos.", correct: false }, { text: "As mulheres cobriam o rosto com véus de ouro para ostentação.", correct: false }, { text: "Havia cobrança de ingressos financeiros para participar da mesa.", correct: false }] },
-            { chapter: 12, question: "Em 1 Coríntios 12, ao explicar os dons espirituais, qual a afirmação fundamental sobre a origem deles?", hint: "Capítulo 12 versículo 4 - Há variedade de manifestações, mas uma única fonte primária.", options: [{ text: "Ora, há diversidade de dons, mas o mesmo Espírito.", correct: true }, { text: "Os dons são alcançados por meio de jejuns e méritos próprios.", correct: false }, { text: "Cada apóstolo possui a exclusividade de distribuir um dom específico.", correct: false }, { text: "Os dons cessaram após a fundação da igreja em Jerusalém.", correct: false }] },
-            { chapter: 13, question: "No famoso capítulo 13 da ACF, qual a palavra utilizada para traduzir o amor supremo que é paciente e benigno?", hint: "Capítulo 13 - A ACF preserva este termo clássico originado do latim 'caritas'.", options: [{ text: "Caridade", correct: true }, { text: "Amor", correct: false }, { text: "Afeto", correct: false }, { text: "Fraternidade", correct: false }] },
-            { chapter: 14, question: "Qual a máxima final deixada por Paulo para regular o culto público e os dons em 1 Coríntios 14:40?", hint: "Capítulo 14 versículo 40 - Duas palavras que definem etiqueta, ordem e beleza na liturgia.", options: [{ text: "Mas faça-se tudo decentemente e com ordem.", correct: true }, { text: "Mas permaneçam todos em silêncio absoluto no santuário.", correct: false }, { text: "Mas cantem apenas os hinos ensinados pelos apóstolos.", correct: false }, { text: "Mas deem preferência sempre aos ensinamentos dos anciãos.", correct: false }] },
-            { chapter: 15, question: "Em 1 Coríntios 15:14, qual a consequência direta se a ressurreição de Cristo não fosse um fato real?", hint: "Capítulo 15 versículo 14 - Esvaziamento total da pregação apostólica e da crença.", options: [{ text: "Logo é vã a nossa pregação, e também é vã a vossa fé.", correct: true }, { text: "Ainda estaríamos sob o domínio do Império Romano.", correct: false }, { text: "Os apóstolos deveriam retornar para as suas redes de pesca.", correct: false }, { text: "A lei de Moisés precisaria ser totalmente reescrita.", correct: false }] },
-            { chapter: 16, question: "Logo no início do capítulo 16, sobre qual prática administrativa e financeira Paulo dá ordens expressas?", hint: "Capítulo 16 versículo 1 e 2 - Organização financeira prévia voltada aos necessitados.", options: [{ text: "A coleta que se faz para os santos", correct: true }, { text: "A compra de propriedades para reuniões", correct: false }, { text: "O salário mensal fixo para os presbíteros", correct: false }, { text: "A arrecadação dos dízimos das colheitas agrícolas", correct: false }] }
-        ];
+        let activeQuestions = [];
+        let currentIdx = 0, totalScore = 0, correctCount = 0, answered = false;
 
-        // ENGINE DA PLATAFORMA
-        let currentQuestions = [];
-        let currentIndex = 0;
-        let score = 0;
-        let isWaiting = false;
-        let selectedIdx = null;
-        let timerId = null;
-        let timeRemaining = 20;
-        let isPressureMode = false;
-        let wrongQuestionsThisRun = [];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initTheme();
-            renderSetupOptions();
-            renderStudyAccordion();
-            updateStats();
-            setupKeyboard();
-        });
-
-        function initTheme() {
-            if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
-        }
-
-        function toggleTheme() {
-            document.body.classList.toggle('dark-theme');
-            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-        }
-
-        function navigateTo(id) {
+        function toggleTheme() { document.body.classList.toggle('dark-theme'); }
+        function navigateTo(id) { 
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-            
             document.getElementById(id).classList.add('active');
-            const navId = (id.startsWith('quiz') || id === 'quiz-active') ? 'nav-quiz' : 'nav-' + id;
-            if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
-
-            if(id !== 'quiz-active') clearInterval(timerId);
-            if(id === 'home') updateStats();
+            if(document.getElementById(`nav-${id.split('-')[0]}`)) document.getElementById(`nav-${id.split('-')[0]}`).classList.add('active');
+            if(id === 'history') renderHistory();
         }
 
-        function renderSetupOptions() {
-            const select = document.getElementById('quiz-type');
-            select.innerHTML = '<option value="all">Simulado Geral Completo (16 Capítulos)</option>';
-            for(let i=1; i<=16; i++) {
-                select.innerHTML += `<option value="${i}">Apenas Capítulo ${i}</option>`;
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
+            return array;
         }
 
-        // RENDER MODO ESTUDO INTEIRAMENTE INTERATIVO
-        function renderStudyAccordion() {
-            const container = document.getElementById('study-accordion-container');
-            container.innerHTML = '';
-            const completed = JSON.parse(localStorage.getItem('studyProgress')) || [];
+        function removeAccents(str) { return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
 
-            studyData.forEach(item => {
-                const isChecked = completed.includes(item.cap) ? 'checked' : '';
-                const div = document.createElement('div');
-                div.className = 'accordion-item';
-                div.innerHTML = `
-                    <div class="accordion-header" onclick="toggleAccordion(${item.cap})">
-                        <span>📖 ${item.title}</span>
-                        <span id="accordion-arrow-${item.cap}">▼</span>
-                    </div>
-                    <div class="accordion-content" id="accordion-content-${item.cap}">
-                        <div class="study-meta">
-                            <label class="check-container">
-                                <input type="checkbox" ${isChecked} onclick="toggleReadProgress(event, ${item.cap})"> Marcar como Estudado
-                            </label>
-                        </div>
-                        <p>${item.summary}</p>
-                        <div class="gold-verses">
-                            "${item.verse}"
-                            <strong>— ${item.ref} (Texto de Ouro ACF)</strong>
-                        </div>
-                        <h4 style="margin-top:1.5rem; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.5px;">Flashcards de Fixação Rápida:</h4>
-                        <div class="flashcards-container">
-                            ${item.cards.map(c => `
-                                <div class="flashcard" onclick="this.classList.toggle('flipped')">
-                                    <div class="card-front">${c.f}</div>
-                                    <div class="card-back">${c.b}</div>
-                                    <span class="flashcard-hint-badge">Clique p/ virar</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
+        function startEngine() {
+            const mode = document.getElementById('quiz-mode').value;
+            let pool = [];
+            let limit = 15;
+
+            if (mode.startsWith('cap')) {
+                const parts = mode.split('-');
+                const capNum = parseInt(parts[0].replace('cap', ''));
+                const diff = parts[1];
+                pool = questionBank.filter(q => q.cap === capNum && q.diff === diff);
+            } else if (mode === "geral-unico") {
+                pool = questionBank.filter(q => q.diff === "general");
+                limit = 30;
+            } else if (mode === "geral-random") {
+                pool = [...questionBank];
+                limit = 30;
+            }
+
+            if(pool.length === 0) return alert("As perguntas deste módulo ainda não foram adicionadas!");
+
+            activeQuestions = shuffle(pool).slice(0, limit);
+            activeQuestions.forEach(q => { if(q.type === 'mcq') q.options = shuffle(q.options); });
+            currentIdx = 0; totalScore = 0; correctCount = 0;
+            navigateTo('quiz-active'); renderQ();
         }
 
-        function toggleAccordion(cap) {
-            const content = document.getElementById(`accordion-content-${cap}`);
-            const arrow = document.getElementById(`accordion-arrow-${cap}`);
-            const isOpen = content.classList.contains('open');
+        function renderQ() {
+            answered = false; const q = activeQuestions[currentIdx];
+            document.getElementById('q-counter').innerText = `Questão ${currentIdx + 1}/${activeQuestions.length}`;
+            document.getElementById('q-diff').innerText = q.diff;
+            document.getElementById('q-pts').innerText = `+${q.pts} Pts`;
+            document.getElementById('question-text').innerHTML = q.q;
             
-            document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-            document.querySelectorAll('[id^="accordion-arrow-"]').forEach(a => a.innerText = '▼');
+            const uiMcq = document.getElementById('ui-mcq'), uiDesc = document.getElementById('ui-desc'), feedback = document.getElementById('feedback-box');
+            uiMcq.style.display = 'none'; uiDesc.style.display = 'none'; feedback.style.display = 'none';
+            document.getElementById('btn-submit').style.display = 'inline-flex'; document.getElementById('btn-next').style.display = 'none';
 
-            if(!isOpen) {
-                content.classList.add('open');
-                arrow.innerText = '▲';
-            }
-        }
-
-        function toggleReadProgress(event, cap) {
-            event.stopPropagation();
-            let completed = JSON.parse(localStorage.getItem('studyProgress')) || [];
-            if(event.target.checked) {
-                if(!completed.includes(cap)) completed.push(cap);
-            } else {
-                completed = completed.filter(c => c !== cap);
-            }
-            localStorage.setItem('studyProgress', JSON.stringify(completed));
-            updateStats();
-        }
-
-        function updateStats() {
-            const history = JSON.parse(localStorage.getItem('quizHistoryPro')) || [];
-            const completed = JSON.parse(localStorage.getItem('studyProgress')) || [];
-            
-            document.getElementById('stat-tests').innerText = history.length;
-            document.getElementById('stat-chapters').innerText = `${completed.length}/16`;
-
-            if(history.length === 0) {
-                document.getElementById('stat-avg').innerText = '0%';
-                return;
-            }
-            let totalPerc = history.reduce((acc, curr) => acc + curr.percentage, 0);
-            document.getElementById('stat-avg').innerText = `${(totalPerc / history.length).toFixed(0)}%`;
-        }
-
-        // CORE DO QUIZ
-        function shuffle(arr) { return arr.sort(() => Math.random() - 0.5); }
-
-        function startQuiz() {
-            const scope = document.getElementById('quiz-type').value;
-            isPressureMode = document.getElementById('config-pressure').checked;
-            wrongQuestionsThisRun = [];
-
-            let filtered = scope === 'all' ? [...allQuestions] : allQuestions.filter(q => q.chapter == scope);
-            currentQuestions = shuffle(JSON.parse(JSON.stringify(filtered)));
-            currentQuestions.forEach(q => q.options = shuffle(q.options));
-
-            currentIndex = 0;
-            score = 0;
-            navigateTo('quiz-active');
-            renderQuestion();
-        }
-
-        function renderQuestion() {
-            isWaiting = false;
-            selectedIdx = null;
-            document.getElementById('hint-box').style.display = 'none';
-            document.getElementById('btn-submit').style.display = 'inline-flex';
-            document.getElementById('btn-hint').style.display = 'inline-flex';
-            document.getElementById('btn-next').style.display = 'none';
-
-            // Barra de Progresso
-            document.getElementById('quiz-progress-bar').style.width = `${(currentIndex / currentQuestions.length) * 100}%`;
-            document.getElementById('quiz-progress-text').innerText = `Questão ${currentIndex + 1} de ${currentQuestions.length}`;
-
-            const q = currentQuestions[currentIndex];
-            document.getElementById('question-text').innerText = `(Capítulo ${q.chapter}) — ${q.question}`;
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            q.options.forEach((opt, idx) => {
-                const label = document.createElement('label');
-                label.className = 'option-label';
-                label.id = `lbl-opt-${idx}`;
-                label.innerHTML = `<input type="radio" name="q-opt" value="${idx}" onchange="selectedIdx=${idx}"> ${opt.text}`;
-                container.appendChild(label);
-            });
-
-            if(isPressureMode) {
-                document.getElementById('quiz-timer').style.display = 'block';
-                launchTimer();
-            } else {
-                document.getElementById('quiz-timer').style.display = 'none';
-            }
-        }
-
-        function launchTimer() {
-            clearInterval(timerId);
-            timeRemaining = 20;
-            document.getElementById('quiz-timer').innerText = `${timeRemaining}s`;
-            timerId = setInterval(() => {
-                timeRemaining--;
-                document.getElementById('quiz-timer').innerText = `${timeRemaining}s`;
-                if(timeRemaining <= 0) {
-                    clearInterval(timerId);
-                    autoFailTimeout();
-                }
-            }, 1000);
-        }
-
-        function revealHint() {
-            const box = document.getElementById('hint-box');
-            box.innerText = currentQuestions[currentIndex].hint;
-            box.style.display = 'block';
-        }
-
-        function autoFailTimeout() {
-            selectedIdx = -1; // Força erro por estouro de tempo
-            submitAnswer();
-        }
-
-        function submitAnswer() {
-            if(selectedIdx === null) return;
-            clearInterval(timerId);
-            isWaiting = true;
-
-            const q = currentQuestions[currentIndex];
-            let correctIndex = q.options.findIndex(o => o.correct);
-
-            if(selectedIdx !== -1 && q.options[selectedIdx].correct) {
-                score++;
-            } else {
-                // Registra para a revisão de erros estruturada
-                wrongQuestionsThisRun.push({
-                    question: q.question,
-                    chapter: q.chapter,
-                    userAnswer: selectedIdx === -1 ? "Tempo Esgotado" : q.options[selectedIdx].text,
-                    correctAnswer: q.options[correctIndex].text
+            if(q.type === 'mcq') {
+                uiMcq.style.display = 'flex'; uiMcq.innerHTML = '';
+                q.options.forEach((opt, idx) => {
+                    uiMcq.innerHTML += `<label class="option-label" id="opt-lbl-${idx}"><input type="radio" name="r-ans" value="${idx}"> ${opt.text}</label>`;
                 });
-            }
-
-            q.options.forEach((opt, idx) => {
-                const lbl = document.getElementById(`lbl-opt-${idx}`);
-                if(lbl) lbl.querySelector('input').disabled = true;
-                if(opt.correct) lbl.classList.add('correct');
-                if(idx === selectedIdx && !opt.correct) lbl.classList.add('incorrect');
-            });
-
-            document.getElementById('btn-submit').style.display = 'none';
-            document.getElementById('btn-hint').style.display = 'none';
-            document.getElementById('btn-next').style.display = 'inline-flex';
-            document.getElementById('btn-next').focus();
-        }
-
-        function nextQuestion() {
-            currentIndex++;
-            if(currentIndex < currentQuestions.length) {
-                renderQuestion();
-            } else {
-                finishQuiz();
+            } else if (q.type === 'desc') {
+                uiDesc.style.display = 'block'; document.getElementById('answer-desc').value = '';
             }
         }
 
-        function finishQuiz() {
+        function processAnswer() {
+            if(answered) return; const q = activeQuestions[currentIdx]; const feedback = document.getElementById('feedback-box');
+            let isCorrect = false;
+
+            if(q.type === 'mcq') {
+                const selected = document.querySelector('input[name="r-ans"]:checked');
+                if(!selected) return alert("Selecione uma alternativa!");
+                const val = parseInt(selected.value); isCorrect = q.options[val].correct;
+                q.options.forEach((opt, idx) => {
+                    const lbl = document.getElementById(`opt-lbl-${idx}`);
+                    lbl.querySelector('input').disabled = true;
+                    if(opt.correct) lbl.classList.add('correct');
+                    if(idx === val && !opt.correct) lbl.classList.add('incorrect');
+                });
+            } else if (q.type === 'fill') {
+                const input = document.getElementById('fill-ans');
+                if(!input.value) return alert("Preencha a lacuna!");
+                input.disabled = true;
+                if(removeAccents(input.value) === removeAccents(q.answer)) {
+                    isCorrect = true; input.style.borderBottomColor = "var(--success)"; input.style.color = "var(--success)";
+                } else {
+                    input.style.borderBottomColor = "var(--danger)"; input.style.color = "var(--danger)";
+                    feedback.style.display = 'block'; feedback.style.backgroundColor = '#fef2f2'; feedback.style.color = '#7f1d1d';
+                    feedback.innerHTML = `❌ O texto correto é: <strong>${q.answer}</strong>`;
+                }
+            } else if (q.type === 'desc') {
+                const text = document.getElementById('answer-desc').value;
+                if(!text) return alert("Escreva sua resposta!");
+                document.getElementById('answer-desc').disabled = true;
+                const userText = removeAccents(text); let hits = 0;
+                q.keywords.forEach(kw => { if(userText.includes(removeAccents(kw))) hits++; });
+                const requiredHits = Math.min(2, q.keywords.length);
+                if(hits >= requiredHits) { isCorrect = true; } else {
+                    feedback.style.display = 'block'; feedback.style.backgroundColor = '#fef2f2'; feedback.style.color = '#7f1d1d';
+                    feedback.innerHTML = `❌ Resposta incompleta. Faltou abordar: ${q.keywords.join(", ")}`;
+                }
+            }
+
+            if(isCorrect) {
+                totalScore += q.pts; correctCount++;
+                if(q.type !== 'fill') {
+                    feedback.style.display = 'block'; feedback.style.backgroundColor = '#f0fdf4'; feedback.style.color = '#14532d';
+                    feedback.innerHTML = `✅ Resposta Perfeita! +${q.pts} Pontos`;
+                }
+            }
+            answered = true;
+            document.getElementById('btn-submit').style.display = 'none'; document.getElementById('btn-next').style.display = 'inline-flex';
+        }
+
+        function goNext() {
+            currentIdx++;
+            if(currentIdx < activeQuestions.length) renderQ(); else finishGame();
+        }
+
+        function finishGame() {
             navigateTo('quiz-result');
-            const total = currentQuestions.length;
-            const perc = ((score / total) * 100).toFixed(0);
-
-            document.getElementById('score-display').innerText = `${score} de ${total} Acertos`;
-            document.getElementById('percentage-display').innerText = `Aproveitamento da Rodada: ${perc}%`;
-
-            // Salva Histórico
-            const run = {
-                date: new Date().toLocaleString('pt-BR'),
-                scope: document.getElementById('quiz-type').value === 'all' ? 'Geral (ACF)' : `Cap. ${document.getElementById('quiz-type').value}`,
-                score: `${score}/${total}`,
-                percentage: parseInt(perc)
-            };
-            let history = JSON.parse(localStorage.getItem('quizHistoryPro')) || [];
-            history.unshift(run);
-            localStorage.setItem('quizHistoryPro', JSON.stringify(history));
-            renderHistoryTable();
-
-            // Renderiza Filtro de Erros
-            const errWrapper = document.getElementById('review-errors-wrapper');
-            const errList = document.getElementById('review-errors-list');
-            errList.innerHTML = '';
-            
-            if(wrongQuestionsThisRun.length > 0) {
-                errWrapper.style.display = 'block';
-                wrongQuestionsThisRun.forEach(err => {
-                    errList.innerHTML += `
-                        <div class="err-item">
-                            <strong>Capítulo ${err.chapter} — ${err.question}</strong>
-                            <div style="color:var(--danger); font-size:0.9rem; margin-top:0.2rem;">❌ Sua Resposta: ${err.userAnswer}</div>
-                            <div style="color:var(--success); font-size:0.9rem; font-weight:700;">✅ Gabarito Fiel: ${err.correctAnswer}</div>
-                        </div>
-                    `;
-                });
-            } else {
-                errWrapper.style.display = 'none';
-            }
+            document.getElementById('final-score').innerText = `${totalScore} Pontos!`;
+            document.getElementById('final-stats').innerText = `Você acertou ${correctCount} de ${activeQuestions.length} questões.`;
+            const run = { mode: document.getElementById('quiz-mode').options[document.getElementById('quiz-mode').selectedIndex].text, hits: `${correctCount}/${activeQuestions.length}`, pts: totalScore };
+            let hist = JSON.parse(localStorage.getItem('acfEngineHistory')) || [];
+            hist.unshift(run); localStorage.setItem('acfEngineHistory', JSON.stringify(hist));
         }
 
-        function renderHistoryTable() {
-            const history = JSON.parse(localStorage.getItem('quizHistoryPro')) || [];
+        function renderHistory() {
+            const hist = JSON.parse(localStorage.getItem('acfEngineHistory')) || [];
             const tbody = document.getElementById('history-body');
-            tbody.innerHTML = history.length === 0 ? '<tr><td colspan="4">Nenhum teste computado ainda.</td></tr>' : '';
-            
-            history.forEach(h => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${h.date}</td>
-                        <td><strong>${h.scope}</strong></td>
-                        <td>${h.score}</td>
-                        <td style="color:${h.percentage >= 70 ? 'var(--success)' : 'var(--danger)'}; font-weight:bold;">${h.percentage}%</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function clearHistory() {
-            if(confirm("Expurgar permanentemente o histórico do dispositivo?")) {
-                localStorage.removeItem('quizHistoryPro');
-                renderHistoryTable();
-                updateStats();
-            }
-        }
-
-        function setupKeyboard() {
-            document.addEventListener('keydown', (e) => {
-                const active = document.querySelector('section.active');
-                if(!active || active.id !== 'quiz-active') return;
-
-                if(e.key === 'Enter') {
-                    e.preventDefault();
-                    if(isWaiting) { nextQuestion(); } 
-                    else if(selectedIdx !== null) { submitAnswer(); }
-                }
-
-                if(!isWaiting && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
-                    e.preventDefault();
-                    const inputs = document.querySelectorAll('input[name="q-opt"]');
-                    let cur = -1;
-                    inputs.forEach((inp, idx) => { if(inp.checked) cur = idx; });
-
-                    let next = 0;
-                    if(e.key === 'ArrowDown') next = cur < inputs.length - 1 ? cur + 1 : 0;
-                    if(e.key === 'ArrowUp') next = cur > 0 ? cur - 1 : inputs.length - 1;
-
-                    inputs[next].checked = true;
-                    selectedIdx = next;
-                }
-            });
+            tbody.innerHTML = hist.length === 0 ? '<tr><td colspan="3">Nenhum simulado feito.</td></tr>' : '';
+            hist.forEach(h => { tbody.innerHTML += `<tr><td><strong>${h.mode}</strong></td><td>${h.hits}</td><td style="color:var(--pts-color); font-weight:800;">${h.pts} pts</td></tr>`; });
         }
     </script>
 </body>
