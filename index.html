@@ -3,46 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinamento: 1 Coríntios</title>
+    <title>Plataforma de Estudos: 1 Coríntios (ACF)</title>
     <style>
         :root {
-            --primary: #1A365D; 
-            --primary-light: #2B6CB0;
-            --secondary: #E2E8F0; 
-            --text-dark: #2D3748;
-            --text-light: #f8f8f8;
-            --success: #38A169; 
-            --danger: #E53E3E; 
-            --bg-color: #F7FAFC;
+            --primary: #0F172A; /* Grafite Dark Slate */
+            --brand: #1E3A8A;   /* Azul Real Profundo */
+            --brand-light: #3B82F6;
+            --accent: #B45309;  /* Ouro Antigo / Âmbar */
+            --accent-light: #F59E0B;
+            --bg-color: #FAF9F6; /* Branco Marfim (conforto visual) */
+            --card-bg: #FFFFFF;
+            --text-main: #334155; /* Cinza para leitura fluida */
+            --text-title: #1E293B;
+            --border: #E2E8F0;
+            --success: #15803D; /* Verde Muted */
+            --danger: #B91C1C;  /* Vermelho Muted */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-dark);
+            color: var(--text-main);
             line-height: 1.6;
         }
 
-        /* Animações */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         header {
             background-color: var(--primary);
-            color: var(--text-light);
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: white;
+            padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 3px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         nav {
@@ -57,156 +61,225 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            color: white;
         }
+        .logo span { color: var(--accent-light); }
 
         .nav-links button {
             background: none;
             border: none;
-            color: var(--text-light);
-            font-size: 1rem;
-            margin-left: 1.5rem;
+            color: #94A3B8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-left: 1rem;
             cursor: pointer;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.1rem;
             border-radius: 6px;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
-        .nav-links button:hover, .nav-links button.active {
-            background-color: var(--primary-light);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        .nav-links button:hover { color: white; }
+        .nav-links button.active {
+            background-color: var(--brand);
+            color: white;
         }
 
         main {
-            max-width: 800px;
-            margin: 2rem auto;
+            max-width: 1000px;
+            margin: 2.5rem auto;
             padding: 0 2rem;
-            min-height: 70vh;
+            min-height: 75vh;
         }
 
         section {
             display: none;
-            background: white;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            animation: fadeIn 0.4s ease-out forwards;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         section.active { display: block; }
 
-        h1, h2, h3 { color: var(--primary); margin-bottom: 1rem; }
-        p { margin-bottom: 1rem; font-size: 1.05rem; }
+        h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 800; }
+        h2 { color: var(--brand); font-size: 1.4rem; margin-bottom: 1rem; }
+        p { margin-bottom: 1.2rem; font-size: 1.05rem; color: var(--text-main); }
 
+        /* Dashboard Premium (Tela Inicial) */
+        .welcome-box {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--accent);
+        }
+        .welcome-box h1 { color: white; margin-bottom: 0.5rem; font-size: 2.2rem; }
+        .welcome-box p { color: #94A3B8; font-size: 1.1rem; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .stat-card {
+            background: #F8FAFC;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-3px); }
+        .stat-num { display: block; font-size: 2.2rem; font-weight: 800; color: var(--brand); margin-bottom: 0.2rem; }
+        .stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #64748B; }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .method-card {
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: #FCFDFE;
+        }
+        .method-card h3 { color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Botões */
         .btn {
-            background-color: var(--primary);
+            background-color: var(--brand);
             color: white;
             border: none;
-            padding: 0.85rem 1.75rem;
-            font-size: 1.05rem;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
         }
-
-        .btn:hover { background-color: var(--primary-light); transform: translateY(-2px); }
+        .btn:hover { background-color: #172554; transform: translateY(-1px); }
         .btn:active { transform: translateY(0); }
+        .btn-accent { background-color: var(--accent); box-shadow: 0 4px 12px rgba(180, 83, 9, 0.15); }
+        .btn-accent:hover { background-color: #78350F; }
 
-        /* Barra de Progresso do Quiz */
+        /* Barra de Progresso */
         .progress-bar-container {
             width: 100%;
-            height: 10px;
-            background-color: var(--secondary);
-            border-radius: 5px;
+            height: 8px;
+            background-color: var(--border);
+            border-radius: 4px;
             margin-bottom: 2rem;
             overflow: hidden;
         }
-
         .progress-bar {
             height: 100%;
-            background-color: var(--success);
+            background: linear-gradient(90deg, var(--brand) 0%, var(--brand-light) 100%);
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
         }
 
         /* Modo Estudo */
         .chapter-list { display: flex; flex-direction: column; gap: 1.2rem; }
         .chapter-card {
-            border: 1px solid var(--secondary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: box-shadow 0.3s;
-            border-left: 5px solid var(--primary-light);
+            border: 1px solid var(--border);
+            padding: 1.8rem;
+            border-radius: 10px;
+            transition: all 0.25s;
+            background: white;
+            border-left: 4px solid var(--accent);
         }
-        .chapter-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .chapter-card:hover { box-shadow: 0 6px 15px rgba(0,0,0,0.04); transform: translateX(3px); }
+        .chapter-card h3 { color: var(--primary); margin-bottom: 0.6rem; font-size: 1.2rem; }
 
-        /* Modo Quiz */
+        /* Form / Select */
         select {
-            padding: 0.85rem;
+            padding: 0.9rem;
             border-radius: 8px;
-            border: 2px solid var(--secondary);
+            border: 2px solid var(--border);
             font-size: 1rem;
             width: 100%;
-            max-width: 400px;
-            margin-bottom: 1rem;
+            max-width: 450px;
+            margin-bottom: 1.5rem;
             outline: none;
-            transition: border-color 0.3s;
+            color: var(--primary);
+            font-weight: 500;
+            background-color: #F8FAFC;
         }
-        select:focus { border-color: var(--primary-light); }
+        select:focus { border-color: var(--brand-light); background-color: white; }
 
-        .question-text { font-size: 1.35rem; font-weight: 600; margin-bottom: 1.5rem; color: #1a202c; }
-
-        .options-container { display: flex; flex-direction: column; gap: 1rem; }
-
+        /* Quiz Ativo */
+        .question-text { font-size: 1.3rem; font-weight: 700; margin-bottom: 2rem; color: var(--primary); line-height: 1.5; }
+        .options-container { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+        
         .option-label {
             display: flex;
             align-items: center;
             padding: 1.2rem;
-            border: 2px solid var(--secondary);
-            border-radius: 8px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             font-size: 1.05rem;
+            font-weight: 500;
+            background: white;
         }
-
-        .option-label:hover { border-color: var(--primary-light); background: #ebf8ff; }
-        .option-label input { margin-right: 1.2rem; transform: scale(1.3); cursor: pointer; }
+        .option-label:hover { border-color: var(--brand-light); background: #F0F5FF; }
+        .option-label input { margin-right: 1.2rem; transform: scale(1.3); accent-color: var(--brand); cursor: pointer; }
         
-        /* Feedback visual aprimorado */
         .option-label.correct {
-            background-color: #F0FFF4;
+            background-color: #ECFDF5;
             border-color: var(--success);
-            color: #22543D;
-            font-weight: 600;
-            box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.2);
+            color: #064E3B;
+            font-weight: 700;
         }
         .option-label.incorrect {
-            background-color: #FFF5F5;
+            background-color: #FEF2F2;
             border-color: var(--danger);
-            color: #742A2A;
-            opacity: 0.8;
+            color: #7F1D1D;
+            opacity: 0.85;
         }
 
-        /* Histórico */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { text-align: left; padding: 1.2rem; border-bottom: 1px solid var(--secondary); }
-        th { background-color: var(--secondary); color: var(--primary); font-weight: 600; }
-        tr:hover { background-color: #f8fafc; }
+        /* Histórico / Tabelas */
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; background: white; }
+        th, td { text-align: left; padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+        th { background-color: #F1F5F9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+        tr:hover { background-color: #F8FAFC; }
 
-        @media (max-width: 600px) {
-            nav { flex-direction: column; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; }
-            .nav-links button { margin: 0.25rem; }
-            main { padding: 0 1rem; margin: 1rem auto; }
+        .keyboard-hint {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #F1F5F9;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #475569;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; text-align: center; }
+            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; margin-top: 0.5rem; }
+            .nav-links button { margin: 0; padding: 0.5rem 0.8rem; font-size: 0.85rem; }
             section { padding: 1.5rem; }
-            .btn { width: 100%; text-align: center; }
-            select { max-width: 100%; }
+            .welcome-box h1 { font-size: 1.6rem; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
@@ -214,7 +287,7 @@
 
     <header>
         <nav>
-            <div class="logo">1 Coríntios | Master</div>
+            <div class="logo">1 Coríntios | <span>ACF Master</span></div>
             <div class="nav-links">
                 <button id="nav-home" class="active" onclick="navigateTo('home')">Início</button>
                 <button id="nav-study" onclick="navigateTo('study')">Modo Estudo</button>
@@ -226,27 +299,61 @@
 
     <main>
         <section id="home" class="active">
-            <h1>Preparação de Alto Nível: 1 Coríntios</h1>
-            <p>Este sistema interativo foi desenvolvido para maximizar sua retenção de conteúdo e prepará-lo para qualquer desafio sobre o livro de 1 Coríntios.</p>
-            <p><strong>⚡ Dica de Produtividade:</strong> O site é 100% otimizado para teclado. Use as <strong>Setas</strong> para escolher as alternativas e a tecla <strong>ENTER</strong> para confirmar suas ações rapidamente.</p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <button class="btn" onclick="navigateTo('study')">Começar a Estudar</button>
-                <button class="btn" onclick="navigateTo('quiz-setup')" style="background-color: var(--success);">Ir para os Simulados</button>
+            <div class="welcome-box">
+                <h1>Treinamento Bíblico Avançado</h1>
+                <p>Ambiente de alta performance focado na memorização e retenção de 1 Coríntios.</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #E2E8F0;">
+                    📖 Versão Textual Base: <strong>Almeida Corrigida Fiel (ACF)</strong>
+                </div>
+            </div>
+
+            <h2>Seu Painel de Evolução</h2>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <span class="stat-num" id="stat-total-tests">0</span>
+                    <span class="stat-label">Simulados Feitos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num" id="stat-avg-score">0%</span>
+                    <span class="stat-label">Média de Acertos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num" id="stat-best-perf">--</span>
+                    <span class="stat-label">Melhor Desempenho</span>
+                </div>
+            </div>
+
+            <h2>Como Funciona a Metodologia?</h2>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h3>⚡ Teste Ativo</h3>
+                    <p>Responder questões antes ou logo após ler fixa o conteúdo até 3x mais rápido do que apenas fazer leituras passivas.</p>
+                </div>
+                <div class="method-card">
+                    <h3>🎯 Fidelidade Textual</h3>
+                    <p>As perguntas cobram termos literais da ACF (como <em>'caridade'</em>, <em>'fornicação'</em> e <em>'ciência'</em>) preparando você para exames rigorosos.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem;">
+                <button class="btn" onclick="navigateTo('study')">Estudar Resumos</button>
+                <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Iniciar um Simulado</button>
             </div>
         </section>
 
         <section id="study">
-            <h1>Modo Estudo: Resumos</h1>
-            <p>Revise os pontos centrais de cada capítulo antes de testar seus conhecimentos.</p>
+            <h1>Sumários Estruturados (ACF)</h1>
+            <p>Revise as divisões temáticas fundamentais de cada capítulo do livro.</p>
             <div class="chapter-list" id="study-content"></div>
         </section>
 
         <section id="quiz-setup">
             <h1>Configuração do Simulado</h1>
-            <p>Selecione a sua área de foco. A ordem das perguntas e alternativas será gerada aleatoriamente.</p>
-            <label for="quiz-type" style="font-weight: 600; display: block; margin-bottom: 0.5rem;">Foco do Estudo:</label>
+            <p>Escolha o escopo das perguntas. O sistema irá embaralhar as ordens das questões e alternativas de forma randômica.</p>
+            
+            <label for="quiz-type" style="font-weight: 700; display: block; margin-bottom: 0.5rem; color: var(--primary);">Escopo das Questões:</label>
             <select id="quiz-type">
-                <option value="all">Simulado Geral (Todos os Capítulos)</option>
+                <option value="all">Simulado Geral (Todos os 16 Capítulos)</option>
                 <option value="1">Capítulo 1</option>
                 <option value="2">Capítulo 2</option>
                 <option value="3">Capítulo 3</option>
@@ -265,41 +372,44 @@
                 <option value="16">Capítulo 16</option>
             </select>
             <br>
-            <button class="btn" onclick="startQuiz()">Iniciar Simulado [Enter]</button>
+            <button class="btn btn-accent" onclick="startQuiz()">Iniciar Desafio [Enter]</button>
         </section>
 
         <section id="quiz-active">
             <div class="progress-bar-container">
                 <div class="progress-bar" id="quiz-progress-bar"></div>
             </div>
-            <h3 id="quiz-progress-text" style="color: var(--primary-light);">Questão 1 de X</h3>
+            <h3 id="quiz-progress-text" style="color: var(--brand); font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem; text-transform: uppercase;">Questão 1 de X</h3>
             <div class="question-container">
-                <div class="question-text" id="question-text">Texto da pergunta aqui?</div>
+                <div class="question-text" id="question-text">Buscando pergunta...</div>
                 <div class="options-container" id="options-container"></div>
             </div>
             <button class="btn" id="btn-submit" onclick="submitAnswer()">Confirmar Resposta [Enter]</button>
-            <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none; background-color: var(--success);">Avançar [Enter]</button>
+            <button class="btn" id="btn-next" onclick="nextQuestion()" style="display:none; background-color: var(--success);">Avançar Próxima [Enter]</button>
+            
+            <br>
+            <div class="keyboard-hint">⌨️ Use as setas <strong>↑ ↓</strong> para selecionar e <strong>Enter</strong> para confirmar.</div>
         </section>
 
         <section id="quiz-result">
             <h1>Relatório de Desempenho</h1>
-            <h2 id="score-display" style="font-size: 2rem;">Você acertou X de Y!</h2>
-            <p id="percentage-display" style="font-size: 1.2rem; font-weight: bold;"></p>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
-                <button class="btn" onclick="navigateTo('quiz-setup')">Novo Simulado</button>
-                <button class="btn" onclick="navigateTo('history')" style="background-color: var(--primary-light);">Ver Evolução</button>
+            <h2 id="score-display" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Você acertou X de Y!</h2>
+            <p id="percentage-display" style="font-size: 1.2rem; font-weight: bold; margin-bottom: 2rem;"></p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-accent" onclick="navigateTo('quiz-setup')">Refazer / Novo Foco</button>
+                <button class="btn" onclick="navigateTo('history')">Analisar Histórico</button>
             </div>
         </section>
 
         <section id="history">
-            <h1>Sua Evolução</h1>
-            <p>Acompanhe seu progresso. Os dados ficam salvos no seu navegador.</p>
+            <h1>Histórico de Desempenho Local</h1>
+            <p>Seus resultados anteriores ficam guardados na memória interna deste navegador.</p>
             <div style="overflow-x: auto;">
                 <table id="history-table">
                     <thead>
                         <tr>
                             <th>Data/Hora</th>
-                            <th>Foco do Simulado</th>
+                            <th>Foco Avaliado</th>
                             <th>Acertos</th>
                             <th>Aproveitamento</th>
                         </tr>
@@ -307,53 +417,52 @@
                     <tbody id="history-body"></tbody>
                 </table>
             </div>
-            <button class="btn" onclick="clearHistory()" style="background-color: var(--danger); margin-top: 2rem;">Zerar Histórico</button>
+            <button class="btn" onclick="clearHistory()" style="background-color: var(--danger); margin-top: 2rem; font-size: 0.9rem;">Limpar Registros</button>
         </section>
-
     </main>
 
     <script>
-        // BANCO DE DADOS: ESTUDO 
+        // BANCO DE DADOS: ESTUDO (ORGANIZADO NA LINGUAGEM LITERAL DA ACF)
         const studyData = [
-            { cap: 1, title: "Capítulo 1: Divisões e a Mensagem da Cruz", summary: "Paulo apela à unidade contra as divisões partidárias (Paulo, Apolo, Cefas). Destaca que a cruz é loucura para o mundo, mas poder de Deus." },
-            { cap: 2, title: "Capítulo 2: A Verdadeira Sabedoria", summary: "O foco da pregação não é a sabedoria humana, mas o poder do Espírito. O homem natural não compreende as verdades espirituais." },
-            { cap: 3, title: "Capítulo 3: O Edifício de Deus", summary: "Cristo é o único fundamento. Os crentes devem edificar com materiais duráveis (ouro, prata). A igreja é o santuário de Deus." },
-            { cap: 4, title: "Capítulo 4: Servos e Despenseiros", summary: "Os apóstolos são servos humildes. Paulo contrasta o orgulho dos coríntios com as humilhações sofridas pelos apóstolos." },
-            { cap: 5, title: "Capítulo 5: Disciplina na Igreja", summary: "Instruções duras sobre um caso de imoralidade sexual. A ordem é remover o 'fermento velho' para não contaminar a massa." },
-            { cap: 6, title: "Capítulo 6: Litígios e o Corpo como Templo", summary: "Proibição de levar irmãos a tribunais pagãos. O corpo não é para a imoralidade, mas é templo do Espírito Santo." },
-            { cap: 7, title: "Capítulo 7: Casamento e Celibato", summary: "Princípios práticos sobre o casamento, divórcio e o estado de solteiro, focando em servir a Deus sem distrações." },
-            { cap: 8, title: "Capítulo 8: Carnes Sacrificadas a Ídolos", summary: "O princípio da consciência: o conhecimento ensoberbece, mas o amor edifica. Cuidado para não fazer o irmão fraco tropeçar." },
-            { cap: 9, title: "Capítulo 9: Os Direitos do Apóstolo", summary: "Paulo defende seu direito ao sustento, mas abre mão dele pelo Evangelho. Compara a vida cristã a uma corrida atlética." },
-            { cap: 10, title: "Capítulo 10: Avisos da História e Glória a Deus", summary: "O exemplo do deserto de Israel contra a idolatria. O grande resumo: 'Fazei tudo para a glória de Deus'." },
-            { cap: 11, title: "Capítulo 11: Ordem no Culto e na Ceia", summary: "Regras sobre submissão (o véu) e correções severas sobre como celebrar dignamente a Ceia do Senhor." },
-            { cap: 12, title: "Capítulo 12: Dons Espirituais e o Corpo", summary: "Há diversidade de dons concedidos pelo mesmo Espírito. A igreja funciona como um corpo humano interdependente." },
-            { cap: 13, title: "Capítulo 13: A Supremacia do Amor", summary: "Sem amor, os maiores dons espirituais são inúteis. O amor verdadeiro é paciente, bondoso e eterno." },
-            { cap: 14, title: "Capítulo 14: Profecia e Ordem no Culto", summary: "A profecia é superior às línguas porque edifica a todos. Nos cultos, 'faça-se tudo com decência e ordem'." },
-            { cap: 15, title: "Capítulo 15: A Ressurreição", summary: "O alicerce do Evangelho: se Cristo não ressuscitou, a fé é vã. A vitória definitiva sobre a morte." },
-            { cap: 16, title: "Capítulo 16: Coleta e Despedidas", summary: "Orientações sobre a oferta para os santos pobres e saudações finais de encorajamento." }
+            { cap: 1, title: "Capítulo 1: Dissensões Partidárias e a Palavra da Cruz", summary: "Paulo repreende as divisões em Corinto onde membros diziam ser de Paulo, Apolo, Cefas ou Cristo. Afirma que a palavra da cruz é loucura para os que perecem, mas poder de Deus para os salvos." },
+            { cap: 2, title: "Capítulo 2: A Sabedoria Oculta de Deus em Mistério", summary: "A pregação não se baseia em palavras persuasivas de sabedoria humana. Paulo expõe que o homem natural não compreende as coisas do Espírito de Deus, porque lhe são loucura." },
+            { cap: 3, title: "Capítulo 3: O Único Fundamento e as Obras Provadas", summary: "Ninguém pode pôr outro fundamento além de Jesus Cristo. Edificações feitas sobre ele com ouro, prata, pedras preciosas, madeira, feno ou palha serão provadas pelo fogo." },
+            { cap: 4, title: "Capítulo 4: Os Apóstolos como Despenseiros e Espetáculo", summary: "Os ministros são despenseiros dos mistérios de Deus dos quais se exige fidelidade. Descreve os apóstolos como postos por últimos, feitos espetáculo ao mundo, aos anjos e aos homens." },
+            { cap: 5, title: "Capítulo 5: Julgamento da Fornicação Intolerável", summary: "Severa repreensão a um caso de fornicação hedionda (um homem que possuía a mulher de seu pai). Determina expelir o malfeitor e adverte a alpar-se do fermento velho." },
+            { cap: 6, title: "Capítulo 6: Litígios Perante Infiéis e o Corpo como Templo", summary: "Condena irmãos que entram em juízo perante tribunais injustos. Adverte contra pecados carnais destacando textualmente: 'Fugi da prostituição. O vosso corpo é o templo do Espírito Santo'." },
+            { cap: 7, title: "Capítulo 7: Preceitos Sobre Casamento, Celibato e Continência", summary: "Orientações práticas sobre a vida conjugal e viuvez. Traz a famosa máxima de que é melhor casar-se do que abrasar-se, exortando o foco total no serviço do Senhor sem distrações." },
+            { cap: 8, title: "Capítulo 8: Coisas Sacrificadas a Ídolos e o Saber", summary: "Aborda a liberdade de consciência sobre os alimentos sacrificados. Estabelece o marco conceitual da ACF: 'A ciência ensoberbece, mas o amor edifica', exortando a não escandalizar o irmão fraco." },
+            { cap: 9, title: "Capítulo 9: Defesa dos Direitos Apostólicos e a Disciplina", summary: "Paulo argumenta que tem direito a sustento, mas abre mão dele para não criar obstáculo ao Evangelho. Compara a corrida por uma coroa corruptível com a busca da incorruptível." },
+            { cap: 10, title: "Capítulo 10: Exemplos do Deserto e Tudo para Glória de Deus", summary: "Usa os erros e castigos de Israel no deserto como advertência contra a idolatria. Conclui com a norma absoluta: 'Quer comais quer bebais, ou façais outra qualquer coisa, fazei tudo para glória de Deus'." },
+            { cap: 11, title: "Capítulo 11: Cobertura da Cabeça e Desordens na Ceia", summary: "Trata do uso do véu e da ordem de autoridade. Repreende duramente as divisões nas reuniões da Ceia do Senhor, onde um tomava antecipadamente sua refeição ficando com fome e outro embriagava-se." },
+            { cap: 12, title: "Capítulo 12: Diversidade de Dons e a Unidade do Corpo", summary: "Expõe que há diversidade de dons, mas o mesmo Espírito operando em todos. Compara a harmonia da igreja ao funcionamento indissociável dos membros de um único corpo humano." },
+            { cap: 13, title: "Capítulo 13: A Excelência Suprema da Caridade", summary: "O capítulo mais famoso, focado na palavra literal da ACF: Caridade. Sem caridade, dons extraordinários ou sacrifícios extremos são totalmente vãos. A caridade nunca falha." },
+            { cap: 14, title: "Capítulo 14: Regulamento dos Dons de Profecia e Línguas", summary: "A profecia deve ser buscada com zelo por edificar a igreja, ao contrário de línguas sem intérprete. Conclui com a regra litúrgica máxima: 'Mas faça-se tudo decentemente e com ordem'." },
+            { cap: 15, title: "Capítulo 15: A Doutrina Absoluta da Ressurreição dos Mortos", summary: "Defesa teológica central: se Cristo não ressuscitou, é vã a pregação e vã a fé. Discorre detalhadamente sobre o corpo espiritual e a vitória gloriosa final sobre o aguilhão da morte." },
+            { cap: 16, title: "Capítulo 16: Instruções de Coletas, Planos de Viagem e Saudações", summary: "Normas sobre as coletas semanais feitas para os santos necessitados de Jerusalém, recomendações a Timóteo e Apolo, e as solenes saudações de encerramento." }
         ];
 
-        // BANCO DE DADOS: QUESTÕES DO QUIZ
+        // BANCO DE DADOS: QUESTÕES DO SIMULADO (ADAPTADAS MINUCIOSAMENTE PARA A ACF)
         const allQuestions = [
-            { chapter: 1, question: "Em 1 Coríntios 1, quais eram os nomes em torno dos quais os crentes de Corinto estavam se dividindo?", options: [{ text: "Paulo, Apolo, Cefas e Cristo", correct: true }, { text: "Paulo, Pedro, Tiago e João", correct: false }, { text: "Apolo, Silas, Timóteo e Cristo", correct: false }, { text: "Pedro, Estêvão, Filipe e Paulo", correct: false }] },
-            { chapter: 2, question: "De acordo com 1 Coríntios 2, como o 'homem natural' compreende as coisas do Espírito de Deus?", options: [{ text: "Elas lhe parecem loucura e ele não as pode entender.", correct: true }, { text: "Ele as entende através do estudo profundo da filosofia.", correct: false }, { text: "Ele compreende parcialmente, dependendo de sua sabedoria.", correct: false }, { text: "Ele as rejeita porque ofendem sua tradição.", correct: false }] },
-            { chapter: 3, question: "No capítulo 3, Paulo usa materiais de construção como ilustração. Quais materiais resistirão ao fogo no dia do julgamento?", options: [{ text: "Ouro, prata e pedras preciosas", correct: true }, { text: "Madeira, feno e palha", correct: false }, { text: "Tijolo, barro e cimento", correct: false }, { text: "Ferro, bronze e cobre", correct: false }] },
-            { chapter: 4, question: "Como Paulo descreve os apóstolos em relação ao mundo em 1 Coríntios 4:9?", options: [{ text: "Como condenados à morte, feitos espetáculo ao mundo, aos anjos e aos homens.", correct: true }, { text: "Como reis que reinam em sabedoria e poder na terra.", correct: false }, { text: "Como sacerdotes vestidos de glória no templo do Senhor.", correct: false }, { text: "Como líderes respeitados pelas autoridades judaicas.", correct: false }] },
-            { chapter: 5, question: "Qual era o pecado específico de imoralidade na igreja de Corinto que Paulo manda punir no capítulo 5?", options: [{ text: "Um homem estava possuindo a mulher de seu próprio pai.", correct: true }, { text: "Membros da igreja estavam visitando prostitutas cultuais.", correct: false }, { text: "Dois membros estavam em um relacionamento adúltero em público.", correct: false }, { text: "Alguém havia se casado com um incrédulo proibido.", correct: false }] },
-            { chapter: 6, question: "Em 1 Coríntios 6, qual justificativa Paulo dá para exortar os irmãos a fugirem da imoralidade sexual?", options: [{ text: "O corpo de vocês é templo do Espírito Santo.", correct: true }, { text: "Os magistrados romanos punirão os infratores gravemente.", correct: false }, { text: "Isso mancha a reputação de Paulo diante das outras igrejas.", correct: false }, { text: "As leis de Moisés ainda estão em pleno vigor.", correct: false }] },
-            { chapter: 7, question: "Sobre o casamento e o celibato (capítulo 7), qual é a recomendação geral de Paulo às pessoas solteiras e viúvas?", options: [{ text: "É bom que permaneçam como ele, mas se não podem se conter, devem casar.", correct: true }, { text: "Devem casar imediatamente para evitar fofocas na igreja.", correct: false }, { text: "É estritamente proibido que as viúvas se casem novamente.", correct: false }, { text: "O celibato é exigido para aqueles que servem na igreja.", correct: false }] },
-            { chapter: 8, question: "Qual é a relação entre 'conhecimento' e 'amor' estabelecida por Paulo no capítulo 8?", options: [{ text: "O conhecimento ensoberbece (traz orgulho), mas o amor edifica.", correct: true }, { text: "O conhecimento é o caminho para o amor perfeito.", correct: false }, { text: "O amor salva, mas o conhecimento liberta os cativos.", correct: false }, { text: "Tanto o conhecimento quanto o amor são inúteis sem a fé.", correct: false }] },
-            { chapter: 9, question: "Em 1 Coríntios 9, como Paulo ilustra a disciplina exigida na vida cristã?", options: [{ text: "Como um atleta correndo em um estádio para ganhar uma coroa incorruptível.", correct: true }, { text: "Como um soldado afiando sua espada para a batalha iminente.", correct: false }, { text: "Como um fazendeiro esperando pacientemente pela chuva.", correct: false }, { text: "Como um marinheiro navegando contra ventos fortes.", correct: false }] },
-            { chapter: 10, question: "Complete a frase de 1 Coríntios 10:31: 'Portanto, quer comais quer bebais, ou façais outra qualquer coisa...'", options: [{ text: "...fazei tudo para a glória de Deus.'", correct: true }, { text: "...fazei com moderação e temor.'", correct: false }, { text: "...agradecei aos irmãos na fé.'", correct: false }, { text: "...lembrai-vos dos pobres e viúvas.'", correct: false }] },
-            { chapter: 11, question: "Qual problema principal ocorria durante a Ceia do Senhor em Corinto (capítulo 11)?", options: [{ text: "Havia divisões; uns ficavam com fome, e outros se embriagavam.", correct: true }, { text: "Eles estavam usando pão levedado em vez de pão sem fermento.", correct: false }, { text: "Mulheres estavam distribuindo os elementos, o que era proibido.", correct: false }, { text: "Eles celebravam a Ceia de manhã em vez de à noite.", correct: false }] },
-            { chapter: 12, question: "No capítulo 12, Paulo compara a igreja a qual estrutura orgânica?", options: [{ text: "Um corpo humano com muitos membros interdependentes.", correct: true }, { text: "Uma videira com muitos ramos frutíferos.", correct: false }, { text: "Uma floresta de cedros entrelaçados.", correct: false }, { text: "Um rebanho de ovelhas seguindo atentamente um pastor.", correct: false }] },
-            { chapter: 13, question: "Segundo o capítulo 13, se alguém tem o dom de profecia e conhece todos os mistérios, mas não tem amor, o que essa pessoa é?", options: [{ text: "Nada.", correct: true }, { text: "O sino que ressoa.", correct: false }, { text: "Um falso profeta.", correct: false }, { text: "Alguém reprovado para o ministério.", correct: false }] },
-            { chapter: 14, question: "Em 1 Coríntios 14, por que Paulo prefere que a igreja busque o dom de profecia ao invés do dom de línguas (sem interpretação)?", options: [{ text: "Porque quem profetiza edifica a igreja inteira.", correct: true }, { text: "Porque o dom de línguas havia cessado.", correct: false }, { text: "Porque falar em línguas era considerado paganismo.", correct: false }, { text: "Porque os profetas recebiam sustento financeiro.", correct: false }] },
-            { chapter: 15, question: "O capítulo 15 defende uma doutrina central. Paulo afirma que, se esta não for verdadeira, a fé é inútil. Que doutrina é essa?", options: [{ text: "A ressurreição dos mortos.", correct: true }, { text: "A doutrina da Trindade.", correct: false }, { text: "A inspiração verbal das Escrituras.", correct: false }, { text: "A intercessão dos santos.", correct: false }] },
-            { chapter: 16, question: "Sobre qual assunto prático Paulo dá instruções no início do capítulo 16?", options: [{ text: "A coleta (arrecadação financeira) para os santos de Jerusalém.", correct: true }, { text: "A escolha de presbíteros e diáconos.", correct: false }, { text: "O calendário das festas anuais.", correct: false }, { text: "A compra de um local fixo para a igreja.", correct: false }] }
+            { chapter: 1, question: "Em 1 Coríntios 1:12, quais os líderes que os crentes usavam para justificar suas dissensões partidárias?", options: [{ text: "Paulo, Apolo, Cefas e Cristo", correct: true }, { text: "Paulo, Barnabé, Tiago e João", correct: false }, { text: "Apolo, Silas, Timóteo e Jesus", correct: false }, { text: "Cefas, Lucas, Marcos e Paulo", correct: false }] },
+            { chapter: 2, question: "Segundo 1 Coríntios 2:14, por que o 'homem natural' não compreende as coisas do Espírito de Deus?", options: [{ text: "Porque lhe são loucura; e não pode entendê-las, porquanto se discernem espiritualmente.", correct: true }, { text: "Porque dependem do conhecimento das filosofias humanas antigas.", correct: false }, { text: "Porque ele rejeita a autoridade apostólica de Jerusalém.", correct: false }, { text: "Porque a sua mente está cauterizada pela lei mosaica.", correct: false }] },
+            { chapter: 3, question: "No capítulo 3, quais são os materiais listados por Paulo que podem ser usados para edificar sobre o fundamento, mas que serão provados pelo fogo?", options: [{ text: "Ouro, prata, pedras preciosas, madeira, feno, palha", correct: true }, { text: "Tijolo, cimento, ferro, bronze, argila, folhas", correct: false }, { text: "Ouro, bronze, cobre, pedras, cipreste, linho", correct: false }, { text: "Madeira, ferro, chumbo, pedras lavradas, gesso, palha", correct: false }] },
+            { chapter: 4, question: "Em 1 Coríntios 4:9, como Paulo descreve a condição dos apóstolos em relação ao mundo?", options: [{ text: "Como postos por últimos, como condenados à morte; pois somos feitos espetáculo ao mundo, aos anjos e aos homens.", correct: true }, { text: "Como governantes espirituais coroados com honra diante dos gentios.", correct: false }, { text: "Como sacerdotes intocáveis protegidos no templo do Altíssimo.", correct: false }, { text: "Como mestres ricos que reinam em sabedoria e posses em Corinto.", correct: false }] },
+            { chapter: 5, question: "Em 1 Coríntios 5, qual termo e situação específica Paulo condena rigidamente na igreja?", options: [{ text: "Uma fornicação tal, que nem ainda entre os gentios se nomeia, como é haver quem possua a mulher de seu pai.", correct: true }, { text: "O adultério consensual de dois diáconos em praça pública.", correct: false }, { text: "A visita frequente a santuários pagãos para banquetes rituais.", correct: false }, { text: "Casamentos mistos proibidos pela lei sacerdotal tradicional.", correct: false }] },
+            { chapter: 6, question: "Conforme 1 Coríntios 6:19, qual o forte motivo apresentado para fugir da prostituição?", options: [{ text: "O vosso corpo é o templo do Espírito Santo, que habita em vós, proveniente de Deus...", correct: true }, { text: "As autoridades romanas aplicam multas severas aos imorais.", correct: false }, { text: "A liderança da igreja excluirá permanentemente quem for pego.", correct: false }, { text: "A lei de Moisés exige o apedrejamento público do culpado.", correct: false }] },
+            { chapter: 7, question: "Em relação ao casamento e à continência no capítulo 7, qual a célebre afirmação da ACF para quem não consegue se conter?", options: [{ text: "Porque é melhor casar-se do que abrasar-se.", correct: true }, { text: "Porque o casamento purifica os desejos carnais da mente.", correct: false }, { text: "A solteirice traz vergonha perante a comunidade local.", correct: false }, { text: "Todos são obrigados por mandamento a constituir família na fé.", correct: false }] },
+            { chapter: 8, question: "No capítulo 8, tratando das coisas sacrificadas aos ídolos, qual o contraste estabelecido entre a 'ciência' e o 'amor'?", options: [{ text: "A ciência ensoberbece, mas o amor edifica.", correct: true }, { text: "A ciência liberta a mente, mas o amor prende o coração.", correct: false }, { text: "A ciência traz a salvação, mas o amor traz a paz social.", correct: false }, { text: "Tanto a ciência quanto o amor são inúteis sem o batismo.", correct: false }] },
+            { chapter: 9, question: "Em 1 Coríntios 9:25, os atletas lutam para alcançar uma recompensa temporária. Como a ACF descreve essa recompensa em contraste com a recompensa do cristão?", options: [{ text: "Eles para alcançar uma coroa corruptível; nós, porém, uma incorruptível.", correct: true }, { text: "Eles para ganhar aclamação terrena; nós, a eternidade no céu.", correct: false }, { text: "Eles por medalhas de bronze; nós, por tesouros de ouro puro.", correct: false }, { text: "Eles pela glória da pátria; nós, pelo favor divino imutável.", correct: false }] },
+            { chapter: 10, question: "Qual a instrução clássica sobre as ações diárias deixada em 1 Coríntios 10:31?", options: [{ text: "Portanto, quer comais quer bebais, ou façais outra qualquer coisa, fazei tudo para glória de Deus.", correct: true }, { text: "Portanto, guardai os vossos corações em moderação diante dos homens.", correct: false }, { text: "Portanto, comei com ações de graças o que vos for posto na mesa.", correct: false }, { text: "Portanto, não julgueis a mesa do vosso próximo para não serdes julgados.", correct: false }] },
+            { chapter: 11, question: "Que grave desordem ocorria nas reuniões de Corinto quando se reuniam para comer a Ceia do Senhor (capítulo 11)?", options: [{ text: "Cada um toma antecipadamente a sua própria ceia; e assim um tem fome e outro embriaga-se.", correct: true }, { text: "Eles usavam vinho estragado e pães sacrificados a ídolos pagãos.", correct: false }, { text: "As mulheres cobriam o rosto com véus de ouro para ostentação.", correct: false }, { text: "Havia cobrança de ingressos financeiros para participar da mesa.", correct: false }] },
+            { chapter: 12, question: "Em 1 Coríntios 12, ao explicar os dons espirituais, qual a afirmação fundamental sobre a origem deles?", options: [{ text: "Ora, há diversidade de dons, mas o mesmo Espírito.", correct: true }, { text: "Os dons são alcançados por meio de jejuns e méritos próprios.", correct: false }, { text: "Cada apóstolo possui a exclusividade de distribuir um dom específico.", correct: false }, { text: "Os dons cessaram após a fundação da igreja em Jerusalém.", correct: false }] },
+            { chapter: 13, question: "No famoso capítulo 13 da ACF, qual a palavra utilizada para traduzir o amor supremo que é paciente e benigno?", options: [{ text: "Caridade", correct: true }, { text: "Amor", correct: false }, { text: "Afeto", correct: false }, { text: "Fraternidade", correct: false }] },
+            { chapter: 14, question: "Qual a máxima final deixada por Paulo para regular o culto público e os dons em 1 Coríntios 14:40?", options: [{ text: "Mas faça-se tudo decentemente e com ordem.", correct: true }, { text: "Mas permaneçam todos em silêncio absoluto no santuário.", correct: false }, { text: "Mas cantem apenas os hinos ensinados pelos apóstolos.", correct: false }, { text: "Mas deem preferência sempre aos ensinamentos dos anciãos.", correct: false }] },
+            { chapter: 15, question: "Em 1 Coríntios 15:14, qual a consequência direta se a ressurreição de Cristo não fosse um fato real?", options: [{ text: "Logo é vã a nossa pregação, e também é vã a vossa fé.", correct: true }, { text: "Ainda estaríamos sob o domínio do Império Romano.", correct: false }, { text: "Os apóstolos deveriam retornar para as suas redes de pesca.", correct: false }, { text: "A lei de Moisés precisaria ser totalmente reescrita.", correct: false }] },
+            { chapter: 16, question: "Logo no início do capítulo 16, sobre qual prática administrativa e financeira Paulo dá ordens expressas?", options: [{ text: "A coleta que se faz para os santos", correct: true }, { text: "A compra de propriedades para reuniões", correct: false }, { text: "O salário mensal fixo para os presbíteros", correct: false }, { text: "A arrecadação dos dízimos das colheitas agrícolas", correct: false }] }
         ];
 
-        // ESTADOS DO SISTEMA
+        // ENGINE DO SISTEMA
         let currentQuizQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
@@ -364,6 +473,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderStudyContent();
             renderHistory();
+            updateDashboardStats();
             setupKeyboardNavigation();
         });
 
@@ -373,10 +483,12 @@
             
             document.getElementById(sectionId).classList.add('active');
             
-            const navBtn = document.getElementById('nav-' + (sectionId === 'quiz-setup' || sectionId === 'quiz-active' || sectionId === 'quiz-result' ? 'quiz' : sectionId));
+            const originId = (sectionId.startsWith('quiz-') || sectionId === 'quiz-active') ? 'quiz' : sectionId;
+            const navBtn = document.getElementById('nav-' + originId);
             if(navBtn) navBtn.classList.add('active');
 
             if(sectionId !== 'quiz-active') isWaitingForNext = false;
+            if(sectionId === 'home') updateDashboardStats();
         }
 
         function renderStudyContent() {
@@ -390,30 +502,48 @@
             });
         }
 
+        function updateDashboardStats() {
+            const history = JSON.parse(localStorage.getItem('quizHistoryACF')) || [];
+            const totalTests = history.length;
+            document.getElementById('stat-total-tests').innerText = totalTests;
+            
+            if (totalTests === 0) {
+                document.getElementById('stat-avg-score').innerText = '0%';
+                document.getElementById('stat-best-perf').innerText = '--';
+                return;
+            }
+            
+            let sumPercentage = 0;
+            let maxPercentage = 0;
+            
+            history.forEach(item => {
+                const p = parseFloat(item.percentage);
+                sumPercentage += p;
+                if (p > maxPercentage) maxPercentage = p;
+            });
+            
+            document.getElementById('stat-avg-score').innerText = `${(sumPercentage / totalTests).toFixed(0)}%`;
+            document.getElementById('stat-best-perf').innerText = `${maxPercentage.toFixed(0)}%`;
+        }
+
         function shuffleArray(array) {
-            let curId = array.length;
-            while (0 !== curId) {
-                let randId = Math.floor(Math.random() * curId);
-                curId -= 1;
-                let tmp = array[curId];
-                array[curId] = array[randId];
-                array[randId] = tmp;
+            let m = array.length, t, i;
+            while (m) {
+                i = Math.floor(Math.random() * m--);
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
             }
             return array;
         }
 
         function startQuiz() {
             const type = document.getElementById('quiz-type').value;
-            currentQuizMode = type === 'all' ? 'Simulado Geral' : `Capítulo ${type}`;
+            currentQuizMode = type === 'all' ? 'Geral (ACF)' : `Capítulo ${type}`;
             
-            let filteredQuestions = type === 'all' ? JSON.parse(JSON.stringify(allQuestions)) : JSON.parse(JSON.stringify(allQuestions)).filter(q => q.chapter == parseInt(type));
+            let filtered = type === 'all' ? JSON.parse(JSON.stringify(allQuestions)) : JSON.parse(JSON.stringify(allQuestions)).filter(q => q.chapter == parseInt(type));
 
-            if (filteredQuestions.length === 0) {
-                alert("Ainda não há perguntas para este capítulo.");
-                return;
-            }
-
-            currentQuizQuestions = shuffleArray(filteredQuestions);
+            currentQuizQuestions = shuffleArray(filtered);
             currentQuizQuestions.forEach(q => q.options = shuffleArray(q.options));
 
             currentQuestionIndex = 0;
@@ -423,7 +553,7 @@
         }
 
         function updateProgressBar() {
-            const progress = ((currentQuestionIndex) / currentQuizQuestions.length) * 100;
+            const progress = (currentQuestionIndex / currentQuizQuestions.length) * 100;
             document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
         }
 
@@ -437,25 +567,25 @@
 
             const q = currentQuizQuestions[currentQuestionIndex];
             document.getElementById('quiz-progress-text').innerText = `Questão ${currentQuestionIndex + 1} de ${currentQuizQuestions.length}`;
-            document.getElementById('question-text').innerText = q.question;
+            document.getElementById('question-text').innerText = `(Capítulo ${q.chapter}) — ${q.question}`;
 
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
 
-            q.options.forEach((opt, index) => {
+            q.options.forEach((opt, idx) => {
                 const label = document.createElement('label');
                 label.className = 'option-label';
-                label.id = `option-label-${index}`;
+                label.id = `label-opt-${idx}`;
                 
                 const radio = document.createElement('input');
                 radio.type = 'radio';
                 radio.name = 'quiz-option';
-                radio.value = index;
-                radio.onchange = () => { selectedOptionIndex = index; };
+                radio.value = idx;
+                radio.onchange = () => { selectedOptionIndex = idx; };
 
                 label.appendChild(radio);
                 label.appendChild(document.createTextNode(opt.text));
-                optionsContainer.appendChild(label);
+                container.appendChild(label);
             });
         }
 
@@ -463,19 +593,18 @@
             if (selectedOptionIndex === null) return; 
 
             const q = currentQuizQuestions[currentQuestionIndex];
-            const isCorrect = q.options[selectedOptionIndex].correct;
+            const correctIs = q.options[selectedOptionIndex].correct;
 
-            if (isCorrect) score++;
+            if (correctIs) score++;
 
-            q.options.forEach((opt, index) => {
-                const label = document.getElementById(`option-label-${index}`);
-                const radio = label.querySelector('input');
-                radio.disabled = true; 
+            q.options.forEach((opt, idx) => {
+                const lbl = document.getElementById(`label-opt-${idx}`);
+                lbl.querySelector('input').disabled = true;
 
                 if (opt.correct) {
-                    label.classList.add('correct');
-                } else if (index === selectedOptionIndex && !opt.correct) {
-                    label.classList.add('incorrect');
+                    lbl.classList.add('correct');
+                } else if (idx === selectedOptionIndex) {
+                    lbl.classList.add('incorrect');
                 }
             });
 
@@ -497,32 +626,31 @@
         function finishQuiz() {
             navigateTo('quiz-result');
             const total = currentQuizQuestions.length;
-            const percentage = ((score / total) * 100).toFixed(1);
+            const percentage = ((score / total) * 100).toFixed(0);
 
             document.getElementById('score-display').innerText = `Você acertou ${score} de ${total}!`;
-            document.getElementById('percentage-display').innerText = `Aproveitamento: ${percentage}%`;
+            document.getElementById('percentage-display').innerText = `Aproveitamento Técnico: ${percentage}%`;
 
             const historyItem = {
                 date: new Date().toLocaleString('pt-BR'),
                 mode: currentQuizMode,
                 score: `${score}/${total}`,
-                percentage: percentage
+                percentage: parseFloat(percentage)
             };
 
-            let history = JSON.parse(localStorage.getItem('quizHistory2')) || [];
-            history.unshift(historyItem); 
-            localStorage.setItem('quizHistory2', JSON.stringify(history));
-
+            let history = JSON.parse(localStorage.getItem('quizHistoryACF')) || [];
+            history.unshift(historyItem);
+            localStorage.setItem('quizHistoryACF', JSON.stringify(history));
             renderHistory();
         }
 
         function renderHistory() {
-            const history = JSON.parse(localStorage.getItem('quizHistory2')) || [];
+            const history = JSON.parse(localStorage.getItem('quizHistoryACF')) || [];
             const tbody = document.getElementById('history-body');
             tbody.innerHTML = '';
 
             if (history.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4">Nenhum histórico encontrado. Faça um simulado!</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4">Nenhum registro encontrado. Faça o seu primeiro simulado!</td></tr>';
                 return;
             }
 
@@ -541,23 +669,24 @@
         }
 
         function clearHistory() {
-            if(confirm("Tem certeza que deseja apagar todo o histórico de evolução?")) {
-                localStorage.removeItem('quizHistory2');
+            if(confirm("Deseja deletar permanentemente todo o histórico salvo?")) {
+                localStorage.removeItem('quizHistoryACF');
                 renderHistory();
+                updateDashboardStats();
             }
         }
 
         function setupKeyboardNavigation() {
             document.addEventListener('keydown', (e) => {
-                const activeSection = document.querySelector('section.active');
-                if (!activeSection) return;
+                const activeSec = document.querySelector('section.active');
+                if (!activeSec) return;
 
                 if (e.key === 'Enter') {
-                    if (activeSection.id === 'quiz-setup' && document.activeElement.tagName !== 'BUTTON') {
+                    if (activeSec.id === 'quiz-setup' && document.activeElement.tagName !== 'BUTTON') {
                         startQuiz();
                         e.preventDefault();
                     } 
-                    else if (activeSection.id === 'quiz-active') {
+                    else if (activeSec.id === 'quiz-active') {
                         if (isWaitingForNext) {
                             nextQuestion();
                             e.preventDefault();
@@ -568,29 +697,28 @@
                     }
                 }
                 
-                if (activeSection.id === 'quiz-active' && !isWaitingForNext) {
+                if (activeSec.id === 'quiz-active' && !isWaitingForNext) {
                     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
                         e.preventDefault();
                         const radios = document.querySelectorAll('input[name="quiz-option"]');
                         if (radios.length === 0) return;
                         
-                        let currentIndex = -1;
-                        radios.forEach((r, idx) => { if(r.checked) currentIndex = idx; });
+                        let currentIdx = -1;
+                        radios.forEach((r, idx) => { if(r.checked) currentIdx = idx; });
 
-                        let newIndex = 0;
+                        let newIdx = 0;
                         if (e.key === 'ArrowDown') {
-                            newIndex = currentIndex < radios.length - 1 ? currentIndex + 1 : 0;
+                            newIdx = currentIdx < radios.length - 1 ? currentIdx + 1 : 0;
                         } else if (e.key === 'ArrowUp') {
-                            newIndex = currentIndex > 0 ? currentIndex - 1 : radios.length - 1;
+                            newIdx = currentIdx > 0 ? currentIdx - 1 : radios.length - 1;
                         }
                         
-                        radios[newIndex].checked = true;
-                        selectedOptionIndex = newIndex;
+                        radios[newIdx].checked = true;
+                        selectedOptionIndex = newIdx;
                     }
                 }
             });
         }
     </script>
-    <p></P>
 </body>
 </html>
